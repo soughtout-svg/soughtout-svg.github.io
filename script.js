@@ -135,7 +135,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ── Card tilt ────────────────────────────────────────────────
-document.querySelectorAll('.project-card, .edu-card').forEach(card => {
+document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('mouseenter', () => {
     card.style.transition = 'transform 0.12s ease, box-shadow 0.25s ease, border-color 0.25s ease';
   });
@@ -153,14 +153,3 @@ document.querySelectorAll('.project-card, .edu-card').forEach(card => {
   });
 });
 
-// ── Logo fallbacks ───────────────────────────────────────────
-document.getElementById('baylor-logo')?.addEventListener('error', function () {
-  this.style.display = 'none';
-  const fb = document.getElementById('baylor-fallback');
-  if (fb) { fb.style.display = 'flex'; fb.style.color = '#006535'; }
-});
-document.getElementById('memphis-logo')?.addEventListener('error', function () {
-  this.style.display = 'none';
-  const fb = document.getElementById('memphis-fallback');
-  if (fb) fb.style.display = 'flex';
-});

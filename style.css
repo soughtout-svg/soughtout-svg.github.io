@@ -878,96 +878,6 @@ section { padding: 7rem 0; }
 .honors-card ul li:last-child { border-bottom: none; }
 
 /* ============================================================
-   EDUCATION
-============================================================ */
-.edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
-
-.edu-card {
-  position: relative;
-  overflow: hidden;
-  transition: border-color var(--tr), box-shadow var(--tr);
-}
-.edu-card:hover { border-color: rgba(255,255,255,0.12); box-shadow: 0 16px 50px rgba(0,0,0,0.45); }
-
-.edu-card-accent {
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  border-radius: 4px 0 0 4px;
-}
-.edu-accent-baylor  { background: linear-gradient(to bottom, #006535, #FFB81C); }
-.edu-accent-memphis { background: linear-gradient(to bottom, var(--cyan), var(--purple)); }
-
-.edu-card-inner {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem 2rem 2rem 2.5rem;
-  align-items: flex-start;
-}
-
-.edu-logo-wrap { flex-shrink: 0; }
-
-.edu-logo-ring {
-  width: 84px; height: 84px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid var(--gb);
-  background: #fff;
-  padding: 10px;
-}
-
-.baylor-ring  { box-shadow: 0 0 20px rgba(0,101,53,0.3); }
-.memphis-ring { box-shadow: 0 0 20px rgba(0,212,255,0.15); }
-
-.edu-logo { width: 100%; height: 100%; object-fit: contain; }
-
-.edu-logo-fallback {
-  font-family: 'Fira Code', monospace;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--cyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-.edu-body { flex: 1; min-width: 0; }
-
-.edu-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.edu-top h3   { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem; }
-.edu-degree   { color: var(--cyan); font-size: 0.88rem; margin-bottom: 0.2rem; }
-.edu-location { color: var(--text3); font-size: 0.75rem; font-family: 'Fira Code', monospace; }
-
-.edu-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.edu-col-title {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: 'Fira Code', monospace;
-  margin-bottom: 0.75rem;
-}
-
-/* ============================================================
    CONTACT
 ============================================================ */
 .contact-sub {
@@ -1102,8 +1012,6 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .edu-content { grid-template-columns: 1fr; gap: 1.25rem; }
-  .edu-top { flex-direction: column; }
   .hero-inner { flex-direction: column; text-align: center; padding-top: 7rem; }
   .hero-left { order: 2; }
   .hero-right { order: 1; }
@@ -1122,7 +1030,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .edu-card-inner { flex-direction: column; gap: 1.25rem; }
   .cursor-glow { display: none; }
   .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(7,7,13,0.97); backdrop-filter: blur(20px); padding: 1.5rem; gap: 1.2rem; border-top: 1px solid var(--gb); }
   .nav-links.open { display: flex; }
