@@ -108,8 +108,10 @@ document.getElementById('contact-form').addEventListener('submit', (e) => {
   setTimeout(() => msg.textContent = '', 6000);
 });
 
-// ── Subtle mouse parallax on hero orbs ──────────────────────
+// ── Subtle mouse parallax on hero orbs + cursor glow ────────
 const orbs = document.querySelectorAll('.orb');
+const cursorGlowEl = document.getElementById('cursorGlow');
+
 document.addEventListener('mousemove', (e) => {
   const x = (e.clientX / window.innerWidth  - 0.5) * 20;
   const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -117,4 +119,48 @@ document.addEventListener('mousemove', (e) => {
     const factor = (i + 1) * 0.4;
     orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
   });
+
+  if (cursorGlowEl) {
+    cursorGlowEl.style.left = e.clientX + 'px';
+    cursorGlowEl.style.top  = e.clientY + 'px';
+  }
+});
+
+// ── Scroll progress bar ──────────────────────────────────────
+const scrollProgressEl = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrollTop  = window.scrollY;
+  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+  if (scrollProgressEl) scrollProgressEl.style.width = (scrollTop / docHeight * 100) + '%';
+}, { passive: true });
+
+// ── Card tilt ────────────────────────────────────────────────
+document.querySelectorAll('.project-card, .edu-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform 0.12s ease, box-shadow 0.25s ease, border-color 0.25s ease';
+  });
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const cx   = rect.width  / 2;
+    const cy   = rect.height / 2;
+    const rotX = ((e.clientY - rect.top  - cy) / cy) * -7;
+    const rotY = ((e.clientX - rect.left - cx) / cx) *  7;
+    card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform 0.5s ease, box-shadow 0.25s ease, border-color 0.25s ease';
+    card.style.transform = '';
+  });
+});
+
+// ── Logo fallbacks ───────────────────────────────────────────
+document.getElementById('baylor-logo')?.addEventListener('error', function () {
+  this.style.display = 'none';
+  const fb = document.getElementById('baylor-fallback');
+  if (fb) { fb.style.display = 'flex'; fb.style.color = '#006535'; }
+});
+document.getElementById('memphis-logo')?.addEventListener('error', function () {
+  this.style.display = 'none';
+  const fb = document.getElementById('memphis-fallback');
+  if (fb) fb.style.display = 'flex';
 });
