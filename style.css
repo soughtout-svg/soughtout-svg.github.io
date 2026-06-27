@@ -7,7 +7,7 @@
   --ink:    #1B1A17;
   --muted:  #6E6A62;
   --line:   rgba(27, 26, 23, 0.12);
-  --accent: #1F9D55;
+  --accent: #3A6E55;
 }
 [data-theme="dark"] {
   --bg:     #141310;
