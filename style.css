@@ -130,7 +130,27 @@ strong { font-weight: 600; }
 /* ============================================================
    HERO
 ============================================================ */
-.hero { padding: 72px 32px 56px; }
+.hero-wrap {
+  position: relative;
+  overflow: hidden;
+}
+#swarm-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+.hero {
+  padding: 72px 32px 56px;
+  position: relative;
+  z-index: 1;
+  /* let clicks on empty hero space reach the swarm canvas */
+  pointer-events: none;
+}
+.hero a,
+.hero button { pointer-events: auto; }
 .hero-eyebrow {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
@@ -213,6 +233,59 @@ strong { font-weight: 600; }
   border-color: var(--accent);
 }
 .action-link--cv { border-color: var(--accent); color: var(--accent); }
+
+/* ── Swarm sim console ── */
+.sim-console {
+  margin-top: 46px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.sim-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.sim-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: blink 2.4s ease-in-out infinite;
+}
+.sim-mode { color: var(--accent); }
+.sim-mode.is-warn { color: #C4552A; }
+.sim-btn {
+  pointer-events: auto;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 6px 11px;
+  transition: all .2s;
+}
+.sim-btn:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.sim-btn--warn:hover:not(:disabled) {
+  color: #C4552A;
+  border-color: #C4552A;
+}
+.sim-btn:disabled { opacity: 0.4; cursor: default; }
+.sim-hint { opacity: 0.55; font-size: 10.5px; }
+
+@media (max-width: 640px) {
+  .sim-hint { display: none; }
+}
 
 /* ============================================================
    SECTION HEADINGS
