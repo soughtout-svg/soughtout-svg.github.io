@@ -8,7 +8,7 @@ const NAV = [
   ["/#catalog", "01 Moon"],
   ["/#catalog", "02 Mars"],
   ["/#catalog", "03 Deep space"],
-  ["/resting-places", "04 Map"],
+  ["/resting-places/", "04 Map"],
   ["/#lifespans", "05 Timeline"],
   ["#sources", "06 Sources"],
 ] as const;
@@ -40,7 +40,7 @@ export function SiteHeader() {
 
       <nav aria-label="Main" className="flex flex-wrap gap-6 font-mono text-[13px]">
         {NAV.map(([href, text]) => (
-          <Link key={text} href={href} prefetch={href.startsWith("/#") ? undefined : false} className="whitespace-nowrap">
+          <Link key={text} href={href} className="whitespace-nowrap">
             {text}
           </Link>
         ))}

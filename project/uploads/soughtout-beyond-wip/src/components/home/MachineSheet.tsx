@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
 import { CHAPTERS, LOC, MACHINES, STATUS, WORLDS, pos, when, type Machine } from "@/data/archive/machines";
@@ -27,9 +28,11 @@ interface Props {
   code: string;
   onClose: () => void;
   onPick: (code: string) => void;
+  /** True on the map page, where "Open the full map" would point at itself. */
+  onMapPage?: boolean;
 }
 
-export function MachineSheet({ code, onClose, onPick }: Props) {
+export function MachineSheet({ code, onClose, onPick, onMapPage = false }: Props) {
   const reduce = useReducedMotion();
   const narrow = useNarrow();
   const dlgRef = useRef<HTMLDivElement>(null);
@@ -292,12 +295,14 @@ export function MachineSheet({ code, onClose, onPick }: Props) {
                   </>
                 )}
               </div>
-              <a
-                href={`/resting-places#m=${raw.code}`}
-                className="self-start border border-ink px-5 py-3.5 font-mono text-sm text-ink transition-colors duration-200 hover:bg-ink hover:text-paper"
-              >
-                Open the full map
-              </a>
+              {!onMapPage && (
+                <Link
+                  href={`/resting-places/#m=${raw.code}`}
+                  className="self-start border border-ink px-5 py-3.5 font-mono text-sm text-ink transition-colors duration-200 hover:bg-ink hover:text-paper"
+                >
+                  Open the full map
+                </Link>
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
