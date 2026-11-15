@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MACHINES } from "@/data/archive/machines";
-import { toggleA11y, useA11y, useProgress } from "@/lib/progress";
+import { resetProgress, toggleA11y, useA11y, useProgress } from "@/lib/progress";
 
 const NAV = [
   ["/#catalog", "01 Moon"],
@@ -67,6 +67,18 @@ export function SiteHeader() {
           </span>
           <span className="whitespace-nowrap">{label}</span>
         </div>
+        {(n > 0 || q > 0) && (
+          <button
+            type="button"
+            onClick={() => {
+              if (confirm("Start over? This clears the machines you've explored and your quiz scores.")) resetProgress();
+            }}
+            title="Clear your explored machines and quiz scores"
+            className={`${toggleClass} bg-transparent text-ink hover:bg-paper-2`}
+          >
+            ↺ Reset
+          </button>
+        )}
         <button
           type="button"
           onClick={() => toggleA11y("big")}

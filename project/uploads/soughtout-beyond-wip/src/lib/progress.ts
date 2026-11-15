@@ -84,6 +84,11 @@ export function saveBest(code: string, score: number) {
   write(PROGRESS_KEY, p);
 }
 
+/** Clears explored machines and quiz scores so the reader can start over. */
+export function resetProgress() {
+  write(PROGRESS_KEY, {});
+}
+
 export function applyA11y(a: A11y) {
   const r = document.documentElement.style;
   r.zoom = a.big ? "1.2" : "";
