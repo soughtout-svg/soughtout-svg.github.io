@@ -239,3 +239,25 @@
     display: none !important;
   }
 }
+
+/* Slide deck: one 16:9 slide per printed page, colours kept. */
+@media print {
+  @page {
+    size: 16in 9in;
+    margin: 0;
+  }
+  .deck {
+    gap: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .deck-slide + .deck-slide {
+    break-before: page;
+  }
+  .deck-slide {
+    width: 16in !important;
+    height: 9in !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

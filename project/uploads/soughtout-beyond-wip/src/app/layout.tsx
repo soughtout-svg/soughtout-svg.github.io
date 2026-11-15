@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { AI_DISCLOSURE, SiteFooter } from "@/components/layout/SiteFooter";
 import { ScrollProgress } from "@/components/fx/ScrollProgress";
 import { ScoutGuide } from "@/components/fx/ScoutGuide";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,11 +46,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <ScrollProgress />
-        <SiteHeader />
+        <SiteChrome>
+          <ScrollProgress />
+          <SiteHeader />
+        </SiteChrome>
         <main id="main">{children}</main>
-        <SiteFooter />
-        <ScoutGuide />
+        <SiteChrome>
+          <SiteFooter />
+          <ScoutGuide />
+        </SiteChrome>
       </body>
     </html>
   );
