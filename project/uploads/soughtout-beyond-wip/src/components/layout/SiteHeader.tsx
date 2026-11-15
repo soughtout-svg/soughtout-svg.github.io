@@ -1,73 +1,90 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { NAV_LINKS } from "@/lib/nav";
+import { MACHINES } from "@/data/archive/machines";
+import { toggleA11y, useA11y, useProgress } from "@/lib/progress";
+
+const NAV = [
+  ["/#catalog", "01 Moon"],
+  ["/#catalog", "02 Mars"],
+  ["/#catalog", "03 Deep space"],
+  ["/resting-places", "04 Map"],
+  ["/#lifespans", "05 Timeline"],
+  ["#sources", "06 Sources"],
+] as const;
+
+const toggleClass =
+  "focus-ring box-border flex min-h-11 cursor-pointer items-center border border-ink px-3 transition-colors duration-200";
 
 export function SiteHeader() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const { explored = {}, best = {} } = useProgress();
+  const a11y = useA11y();
+  const n = MACHINES.filter((m) => explored[m.code]).length;
+  const q = MACHINES.filter((m) => best[m.code] != null).length;
+  const all = n === MACHINES.length;
+  const label = all
+    ? `★ All ${MACHINES.length} explored`
+    : `${n}/${MACHINES.length} explored${q ? ` · ${q} quiz${q === 1 ? "" : "zes"}` : ""}`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/5 bg-space-950/70 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="group flex items-baseline gap-2" onClick={() => setOpen(false)}>
-          <span className="font-display text-2xl leading-none">SoughtOut</span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-moon-400 transition-colors group-hover:text-signal">
-            Beyond
-          </span>
-        </Link>
-
-        <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex items-center gap-8">
-            {NAV_LINKS.map((link) => {
-              const active = pathname.startsWith(link.href);
-              return (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    aria-current={active ? "page" : undefined}
-                    className={`font-mono text-xs uppercase tracking-[0.18em] transition-colors ${
-                      active ? "text-signal" : "text-silver-200 hover:text-silver-50"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-
-        <button
-          type="button"
-          className="font-mono text-xs uppercase tracking-[0.18em] text-silver-200 md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((v) => !v)}
+    <header className="flex flex-wrap items-center justify-between gap-4 border-b border-ink px-[clamp(20px,4vw,56px)] py-5">
+      <div className="flex flex-wrap items-baseline gap-3.5">
+        <Link
+          href="/#about"
+          className="text-lg font-semibold tracking-[-.01em] underline decoration-1 underline-offset-4"
         >
-          {open ? "Close" : "Menu"}
-        </button>
+          SoughtOut Beyond
+        </Link>
+        <span className="font-mono text-xs text-muted">Stories of the machines left on the Moon and Mars</span>
       </div>
 
-      {open && (
-        <nav id="mobile-nav" aria-label="Main" className="border-t border-white/5 md:hidden">
-          <ul className="flex flex-col px-4 py-4">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 font-mono text-sm uppercase tracking-[0.18em] text-silver-200"
-                >
-                  {link.label}
-                </Link>
-              </li>
+      <nav aria-label="Main" className="flex flex-wrap gap-6 font-mono text-[13px]">
+        {NAV.map(([href, text]) => (
+          <Link key={text} href={href} prefetch={href.startsWith("/#") ? undefined : false} className="whitespace-nowrap">
+            {text}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="flex flex-wrap items-center gap-2 font-mono text-[13px]">
+        <div
+          title="Machines you’ve explored"
+          className={`box-border flex min-h-11 items-center gap-2.5 border border-ink px-3 transition-colors duration-500 ${
+            all ? "bg-ink text-paper" : "bg-transparent text-ink"
+          }`}
+        >
+          <span aria-hidden="true" className="grid grid-cols-[repeat(8,7px)] gap-0.5">
+            {MACHINES.map((m) => (
+              <span
+                key={m.code}
+                className="size-[7px] transition-colors duration-500"
+                style={{
+                  background: explored[m.code] ? (all ? "#f2f0eb" : "#17160f") : "transparent",
+                  boxShadow: `inset 0 0 0 1px ${all ? "#f2f0eb" : "#17160f"}`,
+                }}
+              />
             ))}
-          </ul>
-        </nav>
-      )}
+          </span>
+          <span className="whitespace-nowrap">{label}</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => toggleA11y("big")}
+          aria-pressed={a11y.big}
+          aria-label="Larger text"
+          className={`${toggleClass} min-w-11 justify-center ${a11y.big ? "bg-ink text-paper" : "bg-transparent text-ink"}`}
+        >
+          A+
+        </button>
+        <button
+          type="button"
+          onClick={() => toggleA11y("hc")}
+          aria-pressed={a11y.hc}
+          className={`${toggleClass} ${a11y.hc ? "bg-ink text-paper" : "bg-transparent text-ink"}`}
+        >
+          High contrast
+        </button>
+      </div>
     </header>
   );
 }

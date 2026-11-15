@@ -1,0 +1,73 @@
+/**
+ * The 16 machines from the Claude Design handoff (Field Archive).
+ * Facts were checked against NASA, JPL and NSSDCA mission pages during design.
+ */
+export type Dest = "moon" | "mars" | "deep";
+export type StatusKey = "still-working" | "silent" | "retired" | "visited" | "drifting";
+
+export interface Machine {
+  code: string;
+  dest: Dest;
+  mission: string;
+  name: string;
+  status: StatusKey;
+  arrival?: string;
+  launched?: string;
+  /** Arrival (or launch) as a decimal year. */
+  a: number;
+  /** Last signal as a decimal year, or null if it still works. */
+  e: number | null;
+  tagline: string;
+  voice: string;
+  found: string;
+  alt: string;
+  img?: string;
+}
+
+/** Latitude, longitude and an optional label for machines with two sites. */
+export type LocPoint = [number, number] | [number, number, string];
+
+const J = "https://d2pn8kiwq2w21t.cloudfront.net/original_images";
+export const MACHINES: Machine[] = [
+      { code: "LUN-001", voice: "I have no batteries, no motors, and no computer. I just sit here and bounce light back to Earth.", found: "The Moon drifts about 3.8 cm farther from Earth every year, and it has a fluid core.", alt: "Buzz Aldrin carrying the laser reflector on the Moon", dest: "moon", mission: "Apollo 11", name: "Laser Ranging Retroreflector", status: "still-working", arrival: "Jul 20, 1969", a: 1969.55, e: null, tagline: "A mirror on the Moon that scientists still shoot lasers at today.", img: "https://www.nasa.gov/wp-content/uploads/2020/03/aldrin20190724.jpg" },
+      { code: "LUN-002", voice: "They folded me up like a lawn chair and drove me 27.8 kilometers across the Moon.", found: "It carried astronauts to the Genesis Rock and helped bring home 76 kg of Moon rocks.", alt: "The Lunar Roving Vehicle parked on the gray lunar surface", dest: "moon", mission: "Apollo 15", name: "Lunar Roving Vehicle", status: "retired", arrival: "Jul 30, 1971", a: 1971.58, e: 1971.59, tagline: "The first car ever driven on another world.", img: "https://nssdc.gsfc.nasa.gov/planetary/image/as15_88_11901.jpg" },
+      {"code":"LUN-003","dest":"moon","mission":"Surveyor","name":"Surveyor 3","status":"visited","arrival":"Apr 20, 1967","a":1967.3,"e":1967.34,"tagline":"The only robot on the Moon that astronauts came back to visit.","voice":"I bounced twice before I settled. Two and a half years later, two astronauts walked over and took my camera home.","found":"Moon soil is like wet sand, strong enough to hold up an Apollo lander. It also sent back 6,326 TV pictures.","alt":"Apollo 12 astronaut beside Surveyor 3, with the lunar module Intrepid behind","img":"https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/as12-48-7134_1280.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"},
+      { code: "MRS-001", voice: "My job was 90 days and about one kilometer. I drove 45.", found: "Hematite, a mineral that proves liquid water once existed on Mars.", alt: "Opportunity’s shadow stretched across a Martian crater", dest: "mars", mission: "Mars Exploration Rover", name: "Opportunity", status: "silent", arrival: "Jan 24, 2004", a: 2004.07, e: 2018.44, tagline: "Built to last 90 days. It kept going for almost 15 years.", img: `${J}/jpegPIA06739.jpg` },
+      { code: "MRS-002", voice: "I was supposed to fly five times. I flew 72.", found: "Powered, controlled flight works on another planet. It flew 17 km in 128.8 minutes and climbed as high as 24 m.", alt: "The Ingenuity helicopter standing on reddish Martian ground", dest: "mars", mission: "Mars 2020", name: "Ingenuity Helicopter", status: "retired", arrival: "Feb 18, 2021", a: 2021.13, e: 2024.05, tagline: "The first aircraft to fly on another planet. Named by a high school student.", img: `${J}/1-PIA25968-Fig-A-crop.jpg` },
+      { code: "MRS-003", voice: "I never moved an inch. I just listened. I heard Mars shake 1,319 times.", found: "Mars has a large liquid core and a thin, three-layered crust. Its mantle is full of giant lumps left by ancient impacts.", alt: "The dusty InSight lander in its final selfie", dest: "mars", mission: "InSight", name: "InSight Lander", status: "retired", arrival: "Nov 26, 2018", a: 2018.9, e: 2022.95, tagline: "The lander that listened to the heartbeat of Mars.", img: `${J}/jpegPIA25287.jpg` },
+      { code: "DSP-001", voice: "I stared at the same patch of sky, watching 150,000 stars for tiny blinks. Each blink was a planet passing in front.", found: "More than 2,600 planets around other stars, and proof our galaxy has more planets than stars.", alt: "Artist’s illustration of the Kepler space telescope in deep space", dest: "deep", mission: "Kepler / K2", name: "Kepler Space Telescope", status: "retired", launched: "Mar 6, 2009", a: 2009.18, e: 2018.83, tagline: "NASA’s first planet hunter. It found planets are everywhere.", img: "https://images-assets.nasa.gov/image/PIA18904/PIA18904~large.jpg" },
+      {"code":"LUN-004","dest":"moon","mission":"Apollo 11","name":"Eagle Descent Stage","status":"retired","arrival":"Jul 20, 1969","a":1969.55,"e":1969.56,"tagline":"The bottom half of the first crewed Moon lander, left in the Sea of Tranquility.","voice":"I held my crew 1.5 meters above the dust for 21 hours. When they left, I was their launch pad.","found":"People could land on the Moon and launch home. The crew brought back 21.55 kg of Moon rock.","alt":"Apollo 11 lunar module Eagle on the Moon, photo AS11-40-5927","img":"https://nssdc.gsfc.nasa.gov/planetary/image/ap11_lm_as11_40_5927.jpg"},
+      {"code":"LUN-005","dest":"moon","mission":"Apollo 15","name":"Falcon & ALSEP Station","status":"retired","arrival":"Jul 30, 1971","a":1971.58,"e":1977.75,"tagline":"Falcon’s descent stage, plus a science station that kept working for six years after the astronauts left.","voice":"My crew drove 27.9 km in their rover. When they flew home, my science station kept listening until 1977.","found":"Moonquakes, the Moon’s magnetic field, and heat leaking out of its interior. The crew also brought back 77.31 kg of samples.","alt":"Apollo 15 lunar module Falcon at Hadley–Apennine","img":"https://nssdc.gsfc.nasa.gov/image/spacecraft/apollo_15_lm.jpg"},
+      {"code":"MRS-004","dest":"mars","mission":"Mars Pathfinder","name":"Sojourner Rover","status":"retired","arrival":"Jul 4, 1997","a":1997.51,"e":1997.74,"tagline":"The first rover on Mars. It weighed 10.6 kg and stood just 30 cm tall.","voice":"We landed inside giant airbags and bounced about 15 times. Then I rolled down a ramp onto Mars.","found":"Rounded pebbles that hint Mars was once warm and wet. The mission sent home more than 17,000 images.","alt":"Sojourner rover beside the Pathfinder lander on Mars, airbags deflated","img":"https://science.nasa.gov/wp-content/uploads/2017/12/pia00621-pathfinder-and-sojourner-with-airbags-deflated.jpg?w=1280"},
+      {"code":"MRS-005","dest":"mars","mission":"Mars Exploration Rover","name":"Spirit","status":"silent","arrival":"Jan 3, 2004","a":2004.01,"e":2010.22,"tagline":"Opportunity’s identical twin. It landed in Gusev Crater, a place that may once have been a lake.","voice":"My twin and I landed on opposite sides of Mars. I drove 7.7 km before my mission ended in 2010.","found":"With Opportunity, proof from the rocks that water lasted on Mars’ surface long ago.","alt":"Artist’s illustration of the Spirit rover on Mars","img":"https://science.nasa.gov/wp-content/uploads/2008/02/365-mer-1280-spirit.jpg"},
+      {"code":"MRS-006","dest":"mars","mission":"Viking","name":"Viking 1 & 2 Landers","status":"retired","arrival":"Jul 20, 1976","a":1976.55,"e":1982.86,"tagline":"Viking 1 made the first truly successful landing on Mars and took the first photo from its surface.","voice":"Minutes after landing, I took the first picture ever made on Mars. I kept sending weather reports for six years.","found":"Soil full of sulfur, unlike anything on Earth or the Moon. The two landers sent back 4,500 photos.","alt":"The first photograph ever taken on the surface of Mars, by Viking 1, July 20, 1976","img":"https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/Viking_1_First_Image_From_Mars_1280.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"},
+      {"code":"MRS-007","dest":"mars","mission":"Phoenix","name":"Phoenix Lander","status":"retired","arrival":"May 25, 2008","a":2008.4,"e":2008.84,"tagline":"Landed farther north on Mars than any mission before it, as far north as northern Alaska is on Earth.","voice":"I dug trenches, baked soil in tiny ovens, and watched bright clumps in my scoop vanish into the air. That was ice.","found":"Water ice just under the surface, and perchlorate, a chemical that could power microbes or help future astronauts.","alt":"Panorama of the Phoenix lander’s deck and the polygon-patterned arctic plain of Mars","img":"https://science.nasa.gov/wp-content/uploads/2024/03/phx20110310b-pia13804-phoenix-msp-deck.jpg?w=1280"},
+      {"code":"DSP-002","dest":"deep","mission":"Dawn","name":"Dawn Spacecraft","status":"retired","launched":"Sep 27, 2007","a":2007.74,"e":2018.83,"tagline":"NASA’s first truly interplanetary spaceship. It orbited two worlds in the asteroid belt: Vesta and Ceres.","voice":"I ran out of fuel, so now I just circle Ceres. I’m its tiny new moon.","found":"Ceres may once have had enough inner heat to make it a possible home for life.","alt":"Artist’s concept of the Dawn spacecraft","img":"https://assets.science.nasa.gov/content/dam/science/psd/solar/internal_resources/2932/Dawn_Artists_Concept.jpeg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"},
+      {"code":"DSP-003","dest":"deep","mission":"NEAR","name":"NEAR Shoemaker","status":"retired","arrival":"Feb 14, 2000","a":2000.12,"e":2001.16,"tagline":"The first spacecraft to orbit an asteroid, and the first to land on one.","voice":"Nobody built me to land. I touched down on Eros at 6.4 km/h and kept talking for two more weeks.","found":"Eros has no magnetic field. It sent home 10 times more data than planned, including 160,000 images.","alt":"Illustration of the NEAR spacecraft at asteroid Eros","img":"https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/07/nearspacecraft.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"},
+      {"code":"DSP-004","dest":"deep","mission":"Pioneer","name":"Pioneer 10 & 11","status":"drifting","launched":"Mar 2, 1972","a":1972.17,"e":2003.06,"tagline":"Pioneer 10 was the first spacecraft to cross the asteroid belt and fly past Jupiter.","voice":"I was built for 21 months. I lasted more than 30 years. Now I’m drifting toward the star Aldebaran, carrying a map home.","found":"The first close-up pictures of Jupiter, including its Great Red Spot, and of its moon Ganymede.","alt":"Illustration of Pioneer 10 at Jupiter","img":"https://assets.science.nasa.gov/content/dam/science/psd/solar/internal_resources/731/Illustrated_Pioneer_10_at_Jupiter.jpeg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"},
+];
+export const LOC: Record<string, [string, LocPoint[] | null]> = {
+      "LUN-001": ["Sea of Tranquility", [[0.67, 23.47]]], "LUN-004": ["Sea of Tranquility, Tranquility Base", [[0.67, 23.47]]],
+      "LUN-002": ["Hadley–Apennine", [[26.13, 3.63]]], "LUN-005": ["Hadley–Apennine", [[26.13, 3.63]]], "LUN-003": ["Ocean of Storms", [[-3.01, -23.42]]],
+      "MRS-001": ["Perseverance Valley, Endeavour Crater", [[-1.95, -5.53]]], "MRS-002": ["Jezero Crater", [[18.44, 77.45]]],
+      "MRS-003": ["Elysium Planitia", [[4.5, 135.62]]], "MRS-004": ["Ares Vallis", [[19.13, -33.22]]], "MRS-005": ["Gusev Crater", [[-14.57, 175.47]]],
+      "MRS-006": ["Viking 1: Chryse Planitia · Viking 2: Utopia Planitia", [[22.27, -47.95, "Viking 1"], [47.97, -134.26, "Viking 2"]]],
+      "MRS-007": ["Vastitas Borealis, the arctic plains", [[68.22, -125.75]]],
+      "DSP-001": ["Trailing Earth around the Sun, switched off.", null], "DSP-002": ["Orbiting the dwarf planet Ceres, out of fuel.", null],
+      "DSP-003": ["On the surface of asteroid 433 Eros.", null], "DSP-004": ["Drifting out of the solar system, silent.", null],
+};
+export const STATUS: Record<StatusKey, [label: string, color: string]> = {
+  "still-working": ["Still working", "oklch(0.5 0.12 150)"],
+  silent: ["Silent", "oklch(0.58 0.17 40)"],
+  retired: ["Retired", "#6b685e"],
+  visited: ["Visited", "oklch(0.5 0.12 255)"],
+  drifting: ["Drifting", "oklch(0.5 0.12 255)"],
+};
+export const WORLDS: Record<Dest, { name: string; map: string | null; credit: string }> = {
+  moon: { name: "The Moon", map: "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_poles_1k.jpg", credit: "Moon map: NASA/GSFC/Arizona State University, LRO camera color mosaic" },
+  mars: { name: "Mars", map: "https://commons.wikimedia.org/wiki/Special:FilePath/Mars_Viking_MDIM21_ClrMosaic_1km.jpg?width=2048", credit: "Mars map: NASA/USGS, Viking color mosaic (MDIM 2.1)" },
+  deep: { name: "Deep space", map: null, credit: "" },
+};
+export const CHAPTERS: [title: string, question: string][] = [["The Mission","Why was it sent?"],["The Journey","How did it get there?"],["The Discovery","What did it find?"],["The Final Signal","How did its mission end?"],["The Legacy","Why does it still matter?"]];
+export function pos(lat: number, lon: number) { const xp = (lon + 180) / 360 * 100; return { x: xp.toFixed(2) + "%", y: ((90 - lat) / 180 * 100).toFixed(2) + "%", xp }; }
+export function when(m: Machine) { return m.arrival ? "Arrived " + m.arrival : "Launched " + m.launched; }
