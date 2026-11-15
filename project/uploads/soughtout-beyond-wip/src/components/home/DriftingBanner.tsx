@@ -19,6 +19,7 @@ export function DriftingBanner() {
 
   return (
     <Backdrop
+      id="drifting"
       src={BACKDROPS.deep}
       position="70% center"
       credit={BACKDROP_CREDIT}

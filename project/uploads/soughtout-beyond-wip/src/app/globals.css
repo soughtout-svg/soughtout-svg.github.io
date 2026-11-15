@@ -179,6 +179,16 @@
   opacity: 1;
 }
 
+/* Scout floats gently in the corner. */
+.scout-bob {
+  animation: scout-bob 3.2s ease-in-out infinite;
+}
+@keyframes scout-bob {
+  50% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+}
+
 /* Gradient shimmer on big display words. */
 .shimmer {
   background: linear-gradient(100deg, currentColor 20%, #fff3dc 45%, currentColor 70%);

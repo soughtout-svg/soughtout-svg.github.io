@@ -3,7 +3,7 @@ import { CHAPTERS } from "@/data/archive/machines";
 
 export function ChapterStrip() {
   return (
-    <section className="flex flex-col gap-7 border-b border-ink px-[clamp(20px,4vw,56px)] py-12">
+    <section id="chapters" className="flex flex-col gap-7 border-b border-ink px-[clamp(20px,4vw,56px)] py-12">
       <div className="flex flex-wrap items-baseline justify-between gap-4">
         <h2 className="m-0 text-[28px] font-medium tracking-[-.02em]">Every story has five chapters</h2>
         <span className="font-mono text-[13px] text-muted">Then a 3-question quiz</span>

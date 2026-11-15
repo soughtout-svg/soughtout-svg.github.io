@@ -122,6 +122,7 @@ export function RestingPlaces() {
   return (
     <>
       <Backdrop
+        id="rest"
         src={BACKDROPS.mars}
         position="center 60%"
         credit={BACKDROP_CREDIT}
@@ -152,12 +153,12 @@ export function RestingPlaces() {
         </div>
       </Backdrop>
 
-      <section className="flex flex-wrap gap-px border-b border-ink bg-ink">
+      <section id="maps" className="flex flex-wrap gap-px border-b border-ink bg-ink">
         <WorldMap world="moon" open={open} onOpen={setOpen} index={0} />
         <WorldMap world="mars" open={open} onOpen={setOpen} index={1} />
       </section>
 
-      <section className="flex flex-col gap-5 px-[clamp(20px,4vw,56px)] pt-10 pb-12">
+      <section id="offmap" className="flex flex-col gap-5 px-[clamp(20px,4vw,56px)] pt-10 pb-12">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <h2 className="m-0 text-[28px] font-medium tracking-[-.02em]">Off the map</h2>
           <span className="font-mono text-[13px] text-muted">Not on the Moon or Mars</span>
