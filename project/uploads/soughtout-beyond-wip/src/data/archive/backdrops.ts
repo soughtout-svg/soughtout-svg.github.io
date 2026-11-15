@@ -12,3 +12,6 @@ export const BACKDROPS = {
 } as const;
 
 export const BACKDROP_CREDIT = "Backdrop: AI illustration made with Higgsfield, not a NASA photo";
+
+/** Scout, the site mascot: a front / side / back turnaround sheet. */
+export const SCOUT_SHEET = `${HF}/hf_20261115_213415_91160541-0d8a-45b0-aab2-a143f23d835f.png`;

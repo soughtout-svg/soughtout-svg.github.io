@@ -4,6 +4,7 @@ import { DriftingBanner } from "@/components/home/DriftingBanner";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { Lifespans } from "@/components/home/Lifespans";
+import { MeetScout } from "@/components/home/MeetScout";
 import { Prologue } from "@/components/home/Prologue";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <ChapterStrip />
       <Lifespans />
       <DriftingBanner />
+      <MeetScout />
       <HowItWorks />
     </>
   );
