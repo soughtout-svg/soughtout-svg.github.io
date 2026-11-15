@@ -6,7 +6,7 @@ import "@fontsource/ibm-plex-sans/latin-600.css";
 import "@fontsource/ibm-plex-mono/latin-400.css";
 import "@fontsource/ibm-plex-mono/latin-500.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
+import { AI_DISCLOSURE, SiteFooter } from "@/components/layout/SiteFooter";
 import { ScrollProgress } from "@/components/fx/ScrollProgress";
 import { ScoutGuide } from "@/components/fx/ScoutGuide";
 import "./globals.css";
@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   },
   description:
     "Stories of the machines left on the Moon, Mars and in deep space, told in their own words for students and curious readers.",
+  // AI-use disclosure in the page metadata, as the Space Apps rules require.
+  other: { "ai-disclosure": AI_DISCLOSURE },
 };
 
 // Re-applies the saved reading settings before first paint, so larger text

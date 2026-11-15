@@ -152,7 +152,7 @@ function Guide({ pathname }: { pathname: string | null }) {
       <motion.button
         type="button"
         onClick={toggle}
-        aria-label={open ? "Hide Scout’s tips" : "Ask Scout for a tip"}
+        aria-label={open ? "Hide Scout’s tips (Scout is an AI-generated image)" : "Ask Scout for a tip (Scout is an AI-generated image)"}
         aria-expanded={open}
         initial={reduce ? false : { opacity: 0, y: 40, rotate: -12 }}
         animate={{ opacity: 1, y: 0, rotate: 0 }}
@@ -164,6 +164,13 @@ function Guide({ pathname }: { pathname: string | null }) {
           className={`absolute inset-0 overflow-hidden rounded-full ${reduce ? "" : "scout-bob"}`}
           style={{ backgroundImage: `url(${SCOUT_SHEET})`, backgroundSize: "300% auto", backgroundPosition: "0% 45%" }}
         />
+        {/* Visible AI watermark on Scout's face. */}
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-sm border border-ink bg-paper px-1 font-mono text-[9px] leading-[14px] text-ink"
+        >
+          AI
+        </span>
         {!open && (
           <span className="absolute -top-1 -right-1 flex size-6 items-center justify-center rounded-full border-2 border-ink bg-accent-bright font-mono text-xs font-medium text-ink">
             ?

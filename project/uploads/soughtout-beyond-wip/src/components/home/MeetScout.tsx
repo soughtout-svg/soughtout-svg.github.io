@@ -34,6 +34,10 @@ export function MeetScout() {
               className="aspect-[16/9] w-full bg-contain bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${SCOUT_SHEET})` }}
             />
+            {/* Visible AI watermark, required by the Space Apps rules for generated images. */}
+            <span className="absolute right-2 bottom-2 bg-ink/75 px-2 py-1 font-mono text-[10px] text-paper">
+              AI-generated image · Higgsfield
+            </span>
           </Tilt>
         </motion.div>
       </div>
