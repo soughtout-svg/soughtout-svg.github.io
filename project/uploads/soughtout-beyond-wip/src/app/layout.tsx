@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   },
   description:
     "Stories of the machines left on the Moon, Mars and in deep space, told in their own words for students and curious readers.",
+  openGraph: {
+    title: "SoughtOut Beyond",
+    description:
+      "16 machines left on the Moon, Mars and in deep space tell their own stories: five chapters, a map of where they rest, and a quiz.",
+    type: "website",
+  },
   // AI-use disclosure in the page metadata, as the Space Apps rules require.
   other: { "ai-disclosure": AI_DISCLOSURE },
 };

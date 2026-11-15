@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
 import { CHAPTERS, LOC, MACHINES, STATUS, WORLDS, pos, when, type Machine } from "@/data/archive/machines";
+import { SOURCES } from "@/data/archive/sources";
 import STORIES, { type Story } from "@/data/archive/stories";
 import { markExplored, saveBest, useProgress } from "@/lib/progress";
 
@@ -455,6 +456,28 @@ export function MachineSheet({ code, onClose, onPick, onMapPage = false }: Props
             </div>
           </div>
         )}
+
+        {/* Where the facts come from */}
+        {(SOURCES[raw.code]?.length ?? 0) > 0 && (
+          <div className="flex flex-[1_1_100%] flex-col gap-3 border-t border-ink px-[clamp(20px,3vw,40px)] pt-5 pb-7">
+            <h3 className="m-0 font-mono text-xs font-normal text-muted">Sources · facts checked against</h3>
+            <ul className="m-0 flex list-none flex-col gap-1.5 p-0 text-[15px] leading-[1.4]">
+              {SOURCES[raw.code].map((src) => (
+                <li key={src.url}>
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-ink/30 underline-offset-[3px] hover:decoration-accent"
+                  >
+                    {src.label}
+                  </a>{" "}
+                  <span className="font-mono text-xs text-muted">· {src.publisher} ↗</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );
@@ -480,7 +503,7 @@ function printStory(m: Machine, statusLabel: string, place: string, coords: stri
 <div class="m">SoughtOut Beyond · ${esc(m.code)} · ${esc(statusLabel)}</div><h1>${esc(m.name)}</h1><div class="m">${esc(m.mission)} · ${esc(when(m))}</div>
 ${m.img ? `<img src="${esc(m.img)}" alt="">` : ""}<p>${esc(m.tagline)}</p><div class="q">“${esc(m.voice)}”</div>
 <p><b>What it discovered.</b> ${esc(m.found)}</p><p><b>Where it rests.</b> ${esc(place)} <span class="m">${esc(coords)}</span></p>
-${chapters}${quiz}<p class="m" style="margin-top:18pt">Facts from NASA, JPL and NSSDCA mission pages. Images: NASA, public domain.</p></body></html>`;
+${chapters}${quiz}${(SOURCES[m.code] ?? []).length ? `<section><h2>Sources</h2><ul>${SOURCES[m.code].map((x) => `<li>${esc(x.label)} (${esc(x.publisher)}) <span class="m">${esc(x.url)}</span></li>`).join("")}</ul></section>` : ""}<p class="m" style="margin-top:18pt">Facts from NASA, JPL and NSSDCA mission pages. Images: NASA, public domain.</p></body></html>`;
   const f = document.createElement("iframe");
   f.setAttribute("aria-hidden", "true");
   f.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0";
