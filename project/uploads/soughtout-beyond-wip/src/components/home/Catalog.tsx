@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { MACHINES, STATUS, when, type Dest } from "@/data/archive/machines";
 import { useProgress } from "@/lib/progress";
+import { Tilt } from "@/components/fx/Tilt";
 import { MachineSheet } from "./MachineSheet";
 
 type Filter = "all" | Dest;
@@ -91,8 +92,9 @@ export function Catalog() {
                 viewport={{ once: true, margin: "-40px" }}
                 exit={reduce ? undefined : { opacity: 0, scale: 0.97, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.6, delay: reduce ? 0 : (i % 3) * 0.07, ease: EASE }}
-                className="group flex cursor-pointer flex-col gap-3.5 bg-paper p-6 text-ink shadow-[1px_0_0_#17160f,0_1px_0_#17160f] outline-offset-[-4px] transition-colors duration-300 hover:bg-paper-2 hover:text-ink focus-visible:outline-3 focus-visible:outline-ink"
+                className="group flex cursor-pointer flex-col bg-paper p-6 text-ink shadow-[1px_0_0_#17160f,0_1px_0_#17160f] outline-offset-[-4px] transition-colors duration-300 hover:bg-paper-2 hover:text-ink focus-visible:outline-3 focus-visible:outline-ink"
               >
+                <Tilt className="flex flex-1 flex-col gap-3.5">
                 <div className="flex justify-between font-mono text-xs">
                   <span>{m.code}</span>
                   <span className="whitespace-nowrap" style={{ color: statusColor }}>
@@ -123,6 +125,7 @@ export function Catalog() {
                   </span>
                   <span className="whitespace-nowrap transition-transform duration-300 group-hover:translate-x-1">{cta}</span>
                 </div>
+                </Tilt>
               </motion.a>
             );
           })}

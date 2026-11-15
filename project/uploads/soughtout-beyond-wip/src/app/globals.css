@@ -26,30 +26,33 @@
   --ease-flow: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* Base element styles live in the base layer so Tailwind utilities can override them. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  margin: 0;
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
 
-a {
-  color: var(--color-ink);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-a:hover {
-  color: var(--color-accent);
-}
+  a {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  a:hover {
+    color: var(--color-accent);
+  }
 
-::selection {
-  background: var(--color-accent-bright);
-  color: var(--color-ink);
+  ::selection {
+    background: var(--color-accent-bright);
+    color: var(--color-ink);
+  }
 }
 
 /* Shared keyboard focus ring. */
@@ -91,6 +94,120 @@ a:hover {
 @keyframes pulse {
   50% {
     opacity: 0.35;
+  }
+}
+
+/* Slow cinematic drift on full-bleed backdrops. */
+.kenburns {
+  animation: kenburns 38s ease-in-out infinite alternate;
+  transform-origin: 60% 40%;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.04) translate(0, 0);
+  }
+  to {
+    transform: scale(1.18) translate(-2%, 1.5%);
+  }
+}
+
+/* Three layers of tiny stars that twinkle out of step with each other. */
+.stars,
+.stars::before,
+.stars::after {
+  background-repeat: repeat;
+  pointer-events: none;
+}
+.stars {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 68% 9%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 37% 41%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 84% 33%, #fff 50%, transparent 51%);
+  background-size: 340px 300px;
+  animation: twinkle 5s ease-in-out infinite;
+}
+.stars::before,
+.stars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.stars::before {
+  background-image:
+    radial-gradient(1px 1px at 22% 72%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 58% 61%, #ffe9c9 50%, transparent 51%),
+    radial-gradient(1px 1px at 91% 84%, #fff 50%, transparent 51%);
+  background-size: 410px 360px;
+  animation: twinkle 7s ease-in-out 1.5s infinite;
+}
+.stars::after {
+  background-image:
+    radial-gradient(1px 1px at 5% 52%, #cfe0ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 47% 88%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 76% 57%, #fff 50%, transparent 51%);
+  background-size: 270px 250px;
+  animation: twinkle 4s ease-in-out 0.8s infinite;
+}
+@keyframes twinkle {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* 3D tilt with a moving glare, driven by --rx/--ry/--gx/--gy from Tilt.tsx. */
+.tilt {
+  position: relative;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s var(--ease-flow);
+  will-change: transform;
+}
+.tilt[data-tilt="on"] {
+  transition: transform 0.08s linear;
+}
+.tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), #ffffff59, transparent 45%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: soft-light;
+}
+.tilt[data-tilt="on"]::after {
+  opacity: 1;
+}
+
+/* Gradient shimmer on big display words. */
+.shimmer {
+  background: linear-gradient(100deg, currentColor 20%, #fff3dc 45%, currentColor 70%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s ease-in-out infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none !important;
+  }
+  .tilt::after {
+    display: none;
+  }
+  .shimmer {
+    animation: none;
+    -webkit-text-fill-color: currentColor;
+    background: none;
   }
 }
 

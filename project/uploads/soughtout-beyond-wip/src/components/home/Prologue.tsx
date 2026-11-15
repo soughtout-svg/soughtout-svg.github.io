@@ -2,6 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { Backdrop } from "@/components/fx/Backdrop";
+import { BACKDROP_CREDIT, BACKDROPS } from "@/data/archive/backdrops";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -45,11 +47,15 @@ function In({
 export function Prologue() {
   const reduce = useReducedMotion();
   return (
-    <section
+    <Backdrop
       id="about"
-      aria-label="Prologue"
-      className="prologue-grid flex min-h-[min(92vh,880px)] flex-col border-b border-ink bg-ink text-paper"
+      label="Prologue"
+      src={BACKDROPS.moon}
+      position="center 70%"
+      shade="linear-gradient(180deg,#17160fe6 0%,#17160fa6 40%,#17160f8c 65%,#17160ff2 100%)"
+      className="flex min-h-[min(100svh,960px)] flex-col border-b border-ink bg-ink text-paper"
     >
+      <div aria-hidden="true" className="prologue-grid absolute inset-0 -z-10 opacity-60" />
       <In
         as="div"
         delay={0.1}
@@ -66,12 +72,13 @@ export function Prologue() {
             <In delay={0.3} className="block">“And they shall call them, The holy people,</In>
             <In delay={0.8} className="block">The redeemed of the LORD:</In>
             <In delay={1.3} className="block">
-              and thou shalt be called, <span className="text-accent-bright">Sought out</span>,
+              and thou shalt be called, <span className="shimmer text-accent-bright">Sought out</span>,
             </In>
             <In delay={1.8} className="block">A city not forsaken.”</In>
           </p>
           <In as="div" delay={2.3} rise={false}>
             <cite className="font-mono text-sm not-italic text-muted-3">— Isaiah 62:12</cite>
+            <span className="mt-2 block font-mono text-[10px] text-paper/50 sm:hidden">{BACKDROP_CREDIT}</span>
           </In>
         </blockquote>
 
@@ -101,7 +108,10 @@ export function Prologue() {
         </In>
       </div>
 
-      <In as="div" delay={3.1} rise={false} className="overflow-hidden border-t border-paper/20 py-4 font-mono text-xs text-muted-2">
+      <In as="div" delay={3.1} rise={false} className="relative overflow-hidden border-t border-paper/20 py-4 font-mono text-xs text-muted-2">
+        <span className="absolute inset-y-0 right-0 z-10 flex items-center bg-ink pr-[clamp(20px,4vw,56px)] pl-4 text-[10px] text-paper/50 shadow-[-24px_0_24px_#17160f] max-sm:hidden">
+          {BACKDROP_CREDIT}
+        </span>
         {/* Seamless loop: the list is doubled and slid left by exactly half. */}
         <div
           aria-hidden="true"
@@ -114,6 +124,6 @@ export function Prologue() {
           ))}
         </div>
       </In>
-    </section>
+    </Backdrop>
   );
 }

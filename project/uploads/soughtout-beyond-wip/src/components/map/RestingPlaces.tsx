@@ -3,7 +3,9 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Backdrop } from "@/components/fx/Backdrop";
 import { MachineSheet } from "@/components/home/MachineSheet";
+import { BACKDROP_CREDIT, BACKDROPS } from "@/data/archive/backdrops";
 import { LOC, MACHINES, STATUS, WORLDS, pos, type Dest } from "@/data/archive/machines";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -41,9 +43,11 @@ function WorldMap({ world, open, onOpen, index }: { world: Exclude<Dest, "deep">
         <span className="font-mono text-xs text-muted">{list.length} machines</span>
       </div>
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        // The map triggers its dots: a dot starts at zero size, so it can't detect itself coming into view.
+        initial={reduce ? false : "hidden"}
+        whileInView="show"
         viewport={{ once: true }}
+        variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
         transition={{ duration: 0.7, delay: index * 0.12, ease: EASE }}
         className="relative aspect-[2/1] overflow-hidden border border-ink bg-[#2a2925] bg-[length:100%_100%] bg-center bg-no-repeat"
         style={{ backgroundImage: W.map ? `url(${W.map})` : "none" }}
@@ -66,9 +70,7 @@ function WorldMap({ world, open, onOpen, index }: { world: Exclude<Dest, "deep">
                 onClick={() => onOpen(s.m.code)}
                 aria-label={`${s.m.name}, ${LOC[s.m.code][0]}. Open its story`}
                 title={s.m.name}
-                initial={reduce ? false : { opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                variants={{ hidden: { opacity: 0, scale: 0 }, show: { opacity: 1, scale: 1 } }}
                 transition={{ duration: 0.4, delay: 0.4 + index * 0.12 + i * 0.06, ease: EASE }}
                 className="group/dot absolute -mt-[22px] -ml-[22px] flex size-11 cursor-pointer items-center justify-center focus-visible:outline-3 focus-visible:-outline-offset-8 focus-visible:outline-paper"
                 style={{ left: s.x, top: s.y, zIndex: s.on ? 4 : s.dup ? 1 : 2 }}
@@ -119,21 +121,28 @@ export function RestingPlaces() {
 
   return (
     <>
-      <section className="flex flex-wrap items-end justify-between gap-6 border-b border-ink px-[clamp(20px,4vw,56px)] pt-[clamp(40px,5vw,72px)] pb-8">
+      <Backdrop
+        src={BACKDROPS.mars}
+        position="center 60%"
+        credit={BACKDROP_CREDIT}
+        stars={false}
+        shade="linear-gradient(180deg,#17160f8c 0%,#17160f99 50%,#17160ff0 100%)"
+        className="flex min-h-[min(70svh,620px)] flex-wrap items-end justify-between gap-6 border-b border-ink px-[clamp(20px,4vw,56px)] pt-[clamp(64px,9vw,140px)] pb-10 text-paper"
+      >
         <div className="flex max-w-[640px] flex-col gap-4">
-          <span className="font-mono text-[13px] text-muted">Map · where each machine stopped for good</span>
+          <span className="font-mono text-[13px] text-accent-bright">Map · where each machine stopped for good</span>
           <h1 className="m-0 text-[clamp(44px,6vw,80px)] leading-[.98] font-medium tracking-[-.035em] text-balance">
             Where they rest.
           </h1>
-          <p className="m-0 text-lg leading-[1.55] text-pretty text-ink-2">
+          <p className="m-0 text-lg leading-[1.55] text-pretty text-[#d9d5ca]">
             Every dot is a real landing site on a real NASA map, plotted by latitude and longitude. Tap one to open its
             story.
           </p>
-          <Link href="/#catalog" className="font-mono text-[13px] underline underline-offset-[3px]">
+          <Link href="/#catalog" className="font-mono text-[13px] text-paper underline underline-offset-[3px] hover:text-accent-bright">
             ← All machines
           </Link>
         </div>
-        <div className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[13px]">
+        <div className="flex flex-wrap gap-x-5 gap-y-2 bg-ink/60 px-3 py-2 font-mono text-[13px] backdrop-blur-sm">
           {LEGEND.map(([label, color]) => (
             <span key={label} className="flex items-center gap-2">
               <span className="size-3 rounded-full shadow-[0_0_0_2px_#f2f0eb,0_0_0_3px_#17160f]" style={{ background: color }} />
@@ -141,7 +150,7 @@ export function RestingPlaces() {
             </span>
           ))}
         </div>
-      </section>
+      </Backdrop>
 
       <section className="flex flex-wrap gap-px border-b border-ink bg-ink">
         <WorldMap world="moon" open={open} onOpen={setOpen} index={0} />

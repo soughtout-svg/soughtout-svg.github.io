@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { MACHINES } from "@/data/archive/machines";
 import { useToday } from "@/lib/today";
@@ -7,9 +8,11 @@ import { CountUp } from "./CountUp";
 
 const OPP_LAST = Date.parse("2018-06-10");
 const LRRR_SET = Date.parse("1969-07-21");
+const HEADLINE = "We left robots on other worlds. Here’s what they found.".split(" ");
 
 export function Hero() {
   const today = useToday();
+  const reduce = useReducedMotion();
   const oppDays = today == null ? null : Math.floor((today - OPP_LAST) / 864e5);
   const llrYears = today == null ? null : Math.floor((today - LRRR_SET) / 3.15576e10);
 
@@ -21,11 +24,26 @@ export function Hero() {
             {MACHINES.length} machines · Moon, Mars, asteroids &amp; deep space · told in their own words
           </div>
         </Reveal>
-        <Reveal delay={0.08}>
-          <h1 className="m-0 text-[clamp(48px,7vw,96px)] leading-[.98] font-medium tracking-[-.035em] text-balance">
-            We left robots on other worlds. Here’s what they found.
-          </h1>
-        </Reveal>
+        {/* The heading triggers the words: each word starts clipped out of sight, so it can't detect itself. */}
+        <motion.h1
+          initial={reduce ? false : "hidden"}
+          whileInView="show"
+          viewport={{ once: true }}
+          className="m-0 text-[clamp(48px,7vw,96px)] leading-[.98] font-medium tracking-[-.035em] text-balance"
+        >
+          {HEADLINE.map((w, i) => [
+            i > 0 ? " " : null,
+            <span key={i} className="inline-block overflow-hidden pb-[.08em] align-bottom">
+              <motion.span
+                className={`inline-block ${w === "found." ? "text-accent" : ""}`}
+                variants={{ hidden: { y: "110%" }, show: { y: 0 } }}
+                transition={{ duration: 0.8, delay: 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {w}
+              </motion.span>
+            </span>,
+          ])}
+        </motion.h1>
         <Reveal delay={0.16} className="flex flex-wrap items-end gap-8">
           <p className="m-0 max-w-[460px] text-lg leading-[1.55] text-pretty text-ink-2">
             Rovers, landers, a helicopter, a mirror and probes still drifting through space. Pick one and it will tell
