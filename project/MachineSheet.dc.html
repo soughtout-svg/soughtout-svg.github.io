@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</helmet>
+<div onClick="{{ close }}" style="position:fixed;inset:0;z-index:20;background:#17160fb3;display:flex;align-items:center;justify-content:center;padding:{{ ovPad }}">
+<div ref="{{ dlgRef }}" role="dialog" aria-modal="true" aria-label="{{ m.name }}" onClick="{{ stop }}" style="position:relative;background:#f2f0eb;color:#17160f;font-family:'IBM Plex Sans',sans-serif;border:{{ dlgBorder }};width:100%;max-width:{{ dlgMax }};height:{{ dlgH }};max-height:100%;overflow:auto;display:flex;flex-wrap:wrap;align-content:flex-start">
+
+<div style="flex:1 1 100%;position:sticky;top:0;z-index:3;background:#f2f0eb;border-bottom:1px solid #17160f;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px clamp(16px,3vw,28px);font-family:'IBM Plex Mono',monospace;font-size:13px">
+<div style="display:flex;flex-wrap:wrap;gap:6px 14px;min-width:0"><span>{{ m.code }}</span><span style="color:{{ m.statusColor }};white-space:nowrap">● {{ m.statusLabel }}</span><span style="color:#6b685e">{{ bestLabel }}</span></div>
+<div style="display:flex;gap:8px;flex:none">
+<button onClick="{{ print }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 14px;display:flex;align-items:center;border:1px solid #17160f;white-space:nowrap" style-hover="background:#e6e2d8" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">Print / Save PDF</button>
+<button onClick="{{ close }}" aria-label="Close" style="all:unset;cursor:pointer;box-sizing:border-box;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #17160f;background:#17160f;color:#f2f0eb;font-size:18px" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">✕</button>
+</div>
+</div>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ true }}">
+<div role="img" aria-label="{{ m.alt }}" style="flex:1 1 360px;min-height:{{ imgMinH }};background:#d9d5ca center/cover no-repeat;background-image:{{ m.bg }}"></div>
+<div style="flex:1.3 1 420px;min-width:0;padding:clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h2 style="margin:0;font-size:clamp(30px,3.6vw,44px);font-weight:500;letter-spacing:-.03em;line-height:1">{{ m.name }}</h2>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">{{ m.mission }} · {{ m.when }}</span>
+</div>
+<p style="margin:0;font-size:17px;line-height:1.55;color:#3b3930;text-wrap:pretty">{{ m.tagline }}</p>
+<p style="margin:0;font-size:clamp(19px,2vw,24px);line-height:1.4;padding:18px 20px;background:#e6e2d8;text-wrap:pretty">“{{ m.voice }}”</p>
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #17160f33;padding-top:14px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">What it discovered</span>
+<span style="font-size:16px;line-height:1.5">{{ m.found }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #17160f33;padding-top:14px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px"><span style="color:#6b685e">Where it rests · {{ m.worldName }}</span><span>{{ m.coords }}</span></div>
+<span style="font-size:16px;line-height:1.5">{{ m.place }}</span>
+<sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
+<div style="position:relative;aspect-ratio:2/1;background:#2a2925 center/100% 100% no-repeat;background-image:{{ map.bg }};border:1px solid #17160f;overflow:hidden">
+<div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(#f2f0eb2b 1px,transparent 1px),linear-gradient(90deg,#f2f0eb2b 1px,transparent 1px);background-size:8.333% 16.666%"></div>
+<div aria-hidden="true" style="position:absolute;left:0;right:0;top:50%;border-top:1px dashed #f2f0eb80"></div>
+<div aria-hidden="true" style="position:absolute;top:0;bottom:0;left:50%;border-left:1px dashed #f2f0eb80"></div>
+<sc-for list="{{ mapDots }}" as="d" hint-placeholder-count="4">
+<button onClick="{{ d.pick }}" aria-label="{{ d.aria }}" aria-current="{{ d.current }}" title="{{ d.name }}" style="all:unset;cursor:pointer;position:absolute;left:{{ d.x }};top:{{ d.y }};width:44px;height:44px;margin:-22px 0 0 -22px;display:flex;align-items:center;justify-content:center;z-index:{{ d.z }}" style-focus="outline:3px solid #f2f0eb;outline-offset:-8px">
+<span style="width:{{ d.size }};height:{{ d.size }};border-radius:50%;background:{{ d.color }};box-shadow:0 0 0 2px #f2f0eb,0 0 0 3px #17160f"></span>
+</button>
+<sc-if value="{{ d.hasLabel }}" hint-placeholder-val="{{ false }}">
+<span style="position:absolute;z-index:3;left:{{ d.x }};top:{{ d.y }};transform:{{ d.labelShift }};font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f2f0eb;border:1px solid #17160f;padding:2px 6px;white-space:nowrap;pointer-events:none">{{ d.label }}</span>
+</sc-if>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b685e"><span>180° W</span><span>90° W</span><span>0°</span><span>90° E</span><span>180° E</span></div>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b685e">Tap another dot to jump to that machine. {{ map.credit }}</span>
+</sc-if>
+</div>
+<sc-if value="{{ showMapLink }}" hint-placeholder-val="{{ false }}">
+<a href="{{ mapHref }}" style="align-self:flex-start;border:1px solid #17160f;padding:14px 20px;font-family:'IBM Plex Mono',monospace;font-size:14px;color:#17160f;text-decoration:none">Open the full map</a>
+</sc-if>
+</div>
+
+<sc-if value="{{ hasStory }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1 1 100%;border-top:1px solid #17160f;display:flex;flex-direction:column">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline;padding:20px clamp(20px,3vw,40px) 16px">
+<h3 style="margin:0;font-size:24px;font-weight:500;letter-spacing:-.02em">Its story in five chapters</h3>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">Then a 3-question quiz</span>
+</div>
+<div role="tablist" style="display:flex;flex-wrap:wrap;gap:1px;background:#17160f;border-top:1px solid #17160f;border-bottom:1px solid #17160f">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+<button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="all:unset;cursor:pointer;box-sizing:border-box;flex:1 1 150px;min-height:48px;padding:12px 16px;background:{{ t.bg }};color:{{ t.fg }};display:flex;flex-direction:column;gap:4px" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:-3px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:.75">0{{ t.n }}</span>
+<span style="font-size:16px;font-weight:500">{{ t.title }}</span>
+<span style="font-size:13px;opacity:.8">{{ t.q }}</span>
+</button>
+</sc-for>
+</div>
+<div role="tabpanel" style="padding:24px clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">Chapter 0{{ chapter.n }} · {{ chapter.title }}</span>
+<sc-if value="{{ canSpeak }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ speakChap }}" aria-pressed="{{ speakOn }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 14px;display:flex;align-items:center;gap:8px;border:1px solid #17160f;background:{{ speakBg }};color:{{ speakFg }};font-family:'IBM Plex Mono',monospace;font-size:13px" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">{{ speakLabel }}</button>
+</sc-if>
+</div>
+<p style="margin:0;font-size:clamp(18px,1.8vw,21px);line-height:1.55;max-width:760px;text-wrap:pretty">{{ chapter.text }}</p>
+<div style="display:flex;gap:8px">
+<button onClick="{{ prevChap }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 16px;display:flex;align-items:center;border:1px solid #17160f;font-family:'IBM Plex Mono',monospace;font-size:13px;opacity:{{ prevOp }}" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">← Back</button>
+<button onClick="{{ nextChap }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 16px;display:flex;align-items:center;background:#17160f;color:#f2f0eb;font-family:'IBM Plex Mono',monospace;font-size:13px" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">{{ nextLabel }}</button>
+</div>
+</div>
+<div ref="{{ quizRef }}" style="border-top:1px solid #17160f;padding:24px clamp(20px,3vw,40px) 32px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline">
+<h3 style="margin:0;font-size:24px;font-weight:500;letter-spacing:-.02em">Quiz: were you listening?</h3>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ scoreLabel }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:#17160f;border:1px solid #17160f">
+<sc-for list="{{ quiz }}" as="q" hint-placeholder-count="3">
+<div style="background:#f2f0eb;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">Question {{ q.n }}</span>
+<span style="font-size:17px;font-weight:500;line-height:1.35">{{ q.q }}</span>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="3">
+<button onClick="{{ o.pick }}" aria-pressed="{{ o.pressed }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:10px 14px;border:1px solid #17160f;background:{{ o.bg }};color:{{ o.fg }};font-size:15px;line-height:1.35;display:flex;justify-content:space-between;gap:10px;align-items:center" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px"><span>{{ o.label }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;white-space:nowrap">{{ o.mark }}</span></button>
+</sc-for>
+</div>
+<sc-if value="{{ q.answered }}" hint-placeholder-val="{{ false }}">
+<p role="status" style="margin:0;font-size:14px;line-height:1.5;color:#3b3930;border-top:1px solid #17160f33;padding-top:10px">{{ q.why }}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<button onClick="{{ resetQuiz }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 16px;display:flex;align-items:center;border:1px solid #17160f;font-family:'IBM Plex Mono',monospace;font-size:13px" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">Try again</button>
+<button onClick="{{ close }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 16px;display:flex;align-items:center;background:#17160f;color:#f2f0eb;font-family:'IBM Plex Mono',monospace;font-size:13px" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">Meet another machine →</button>
+</div>
+</div>
+</div>
+</sc-if>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1100px&quot;,&quot;height&quot;:&quot;800px&quot;},&quot;code&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;MRS-001&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;onClose&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onPick&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(code: string) =&gt; void&quot;},&quot;onMapPage&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { d: null, st: null, chap: 0, ans: {}, speaking: false, narrow: false };
+  dlgRef = React.createRef();
+  quizRef = React.createRef();
+  componentDidMount() {
+    Promise.all([import("./machines.js"), import("./stories.js")]).then(([d, s]) => this.setState({ d, st: s.default }));
+    this._mq = matchMedia("(max-width: 720px)");
+    this._mqf = () => this.setState({ narrow: this._mq.matches });
+    this._mqf(); this._mq.addEventListener("change", this._mqf);
+    this._k = e => { if (e.key === "Escape") this.close(); };
+    addEventListener("keydown", this._k);
+    this._ov = document.body.style.overflow; document.body.style.overflow = "hidden";
+    this.markExplored();
+  }
+  componentDidUpdate(p) {
+    if (p.code !== this.props.code) {
+      this.stopSpeak(); this.setState({ chap: 0, ans: {} }); this.markExplored();
+      if (this.dlgRef.current) this.dlgRef.current.scrollTop = 0;
+    }
+  }
+  componentWillUnmount() {
+    removeEventListener("keydown", this._k); this._mq.removeEventListener("change", this._mqf);
+    this.stopSpeak(); document.body.style.overflow = this._ov || "";
+  }
+  close() { this.stopSpeak(); this.props.onClose && this.props.onClose(); }
+  prog() { try { return JSON.parse(localStorage.getItem("soughtout.progress")) || {}; } catch (e) { return {}; } }
+  saveProg(p) { localStorage.setItem("soughtout.progress", JSON.stringify(p)); dispatchEvent(new Event("soughtout-progress")); }
+  markExplored() {
+    const c = this.props.code; if (!c) return;
+    const p = this.prog(); p.explored = p.explored || {};
+    if (!p.explored[c]) { p.explored[c] = true; this.saveProg(p); }
+  }
+  answer(qi, oi, st) {
+    const ans = { ...this.state.ans, [qi]: oi };
+    this.setState({ ans });
+    if (Object.keys(ans).length === st.quiz.length) {
+      const score = st.quiz.filter((q, i) => ans[i] === q[2]).length;
+      const p = this.prog(); p.best = p.best || {};
+      p.best[this.props.code] = Math.max(score, p.best[this.props.code] ?? 0);
+      this.saveProg(p);
+    }
+  }
+  speak(text) {
+    if (!("speechSynthesis" in window)) return;
+    if (this.state.speaking) { this.stopSpeak(); return; }
+    const u = new SpeechSynthesisUtterance(text); u.rate = 0.95;
+    u.onend = u.onerror = () => this.setState({ speaking: false });
+    speechSynthesis.cancel(); speechSynthesis.speak(u); this.setState({ speaking: true });
+  }
+  stopSpeak() { if ("speechSynthesis" in window) speechSynthesis.cancel(); if (this.state.speaking) this.setState({ speaking: false }); }
+  goChap(i) { this.stopSpeak(); this.setState({ chap: i }); }
+  printStory(m, st, d) {
+    const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const L = "abc";
+    const chapters = st ? d.CHAPTERS.map(([t, q], i) => `<section><h2>0${i + 1} · ${esc(t)} <span class="m">${esc(q)}</span></h2><p>${esc(st.ch[i])}</p></section>`).join("") : "";
+    const quiz = st ? `<section><h2>Quiz</h2><ol>${st.quiz.map(([q, o]) => `<li><b>${esc(q)}</b><br>${o.map((x, i) => `${L[i]}) ${esc(x)}`).join("&nbsp;&nbsp;&nbsp;")}</li>`).join("")}</ol><p class="m">Answers: ${st.quiz.map(([, o, r], i) => `${i + 1}${L[r]}`).join(" · ")}</p></section>` : "";
+    const html = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(m.name)} · SoughtOut Beyond</title><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><style>@page{margin:16mm}body{font-family:'IBM Plex Sans',sans-serif;color:#17160f;font-size:12pt;line-height:1.5;margin:0}h1{font-size:30pt;font-weight:500;letter-spacing:-.02em;margin:6pt 0 4pt;line-height:1.05}h2{font-size:14pt;font-weight:500;margin:16pt 0 4pt;border-top:1px solid #17160f;padding-top:8pt}.m{font-family:'IBM Plex Mono',monospace;font-size:9.5pt;color:#55524a;font-weight:400}.q{background:#ece9e1;padding:10pt 12pt;font-size:13pt;margin:10pt 0}img{width:100%;height:70mm;object-fit:cover;margin:8pt 0}section{break-inside:avoid}li{margin-bottom:8pt}</style></head><body>
+<div class="m">SoughtOut Beyond · ${esc(m.code)} · ${esc(m.statusLabel)}</div><h1>${esc(m.name)}</h1><div class="m">${esc(m.mission)} · ${esc(m.when)}</div>
+${m.img ? `<img src="${esc(m.img)}" alt="">` : ""}<p>${esc(m.tagline)}</p><div class="q">“${esc(m.voice)}”</div>
+<p><b>What it discovered.</b> ${esc(m.found)}</p><p><b>Where it rests.</b> ${esc(m.place)} <span class="m">${esc(m.coords)}</span></p>
+${chapters}${quiz}<p class="m" style="margin-top:18pt">Facts from NASA, JPL and NSSDCA mission pages. Images: NASA, public domain.</p></body></html>`;
+    const f = document.createElement("iframe");
+    f.setAttribute("aria-hidden", "true");
+    f.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0";
+    f.onload = () => setTimeout(() => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) {} setTimeout(() => f.remove(), 60000); }, 600);
+    f.srcdoc = html; document.body.appendChild(f);
+  }
+  renderVals() {
+    const narrow = this.state.narrow;
+    const frame = {
+      ovPad: narrow ? "0" : "clamp(12px,3vw,40px)", dlgBorder: narrow ? "0" : "1px solid #17160f",
+      dlgMax: narrow ? "none" : "1040px", dlgH: narrow ? "100%" : "auto", imgMinH: narrow ? "220px" : "300px",
+      dlgRef: this.dlgRef, quizRef: this.quizRef,
+      close: () => this.close(), stop: e => e.stopPropagation(),
+    };
+    const { d, st: all } = this.state;
+    const raw = d && d.MACHINES.find(x => x.code === this.props.code);
+    if (!raw) return { ...frame, ready: false, m: {}, map: {}, mapDots: [], tabs: [], quiz: [], chapter: {}, print: () => {} };
+    const S = d.STATUS, fmt = (v, p, n) => `${Math.abs(v).toFixed(2)}° ${v >= 0 ? p : n}`;
+    const [place, pts] = d.LOC[raw.code] || ["", null];
+    const W = d.WORLDS[raw.dest];
+    const m = { ...raw, bg: raw.img ? `url(${raw.img})` : "none", when: d.when(raw), statusLabel: S[raw.status][0], statusColor: S[raw.status][1],
+      place, worldName: W.name, coords: pts ? pts.map(p => `${fmt(p[0], "N", "S")}, ${fmt(p[1], "E", "W")}`).join(" · ") : "Off the map" };
+    const selPos = (pts || []).map(p => d.pos(p[0], p[1]));
+    const mapDots = [];
+    d.MACHINES.filter(x => x.dest === raw.dest && d.LOC[x.code] && d.LOC[x.code][1]).forEach(x => d.LOC[x.code][1].forEach(p => {
+      const q = d.pos(p[0], p[1]), isSel = x.code === raw.code;
+      if (!isSel && selPos.some(s => s.x === q.x && s.y === q.y)) return;
+      mapDots.push({ ...q, isSel, name: x.name, color: S[x.status][1], size: isSel ? "18px" : "12px", z: isSel ? 2 : 1, current: isSel ? "true" : "false",
+        hasLabel: isSel, label: p[2] || x.name, labelShift: q.xp > 60 ? "translate(calc(-100% - 16px),-50%)" : "translate(16px,-50%)",
+        aria: isSel ? `${x.name} (showing now)` : `Open ${x.name}`, pick: () => !isSel && this.props.onPick && this.props.onPick(x.code) });
+    }));
+    mapDots.sort((a, b) => a.isSel - b.isSel);
+    const st = all && all[raw.code];
+    const best = (this.prog().best || {})[raw.code];
+    const base = { ...frame, ready: true, m, hasMap: !!(pts && W.map), map: { bg: W.map ? `url(${W.map})` : "none", credit: W.credit }, mapDots,
+      showMapLink: !this.props.onMapPage, mapHref: `Resting Places.dc.html#m=${raw.code}`,
+      bestLabel: best != null ? `Best quiz: ${best}/3` : "", print: () => this.printStory(m, st, d) };
+    if (!st) return { ...base, hasStory: false, tabs: [], quiz: [], chapter: {} };
+    const c = this.state.chap, ans = this.state.ans;
+    const tabs = d.CHAPTERS.map(([title, q], i) => ({ n: i + 1, title, q, on: i === c ? "true" : "false", bg: i === c ? "#17160f" : "#f2f0eb", fg: i === c ? "#f2f0eb" : "#17160f", pick: () => this.goChap(i) }));
+    let score = 0;
+    const quiz = st.quiz.map(([q, opts, right, why], qi) => {
+      const a = ans[qi], answered = a !== undefined;
+      if (a === right) score++;
+      return { n: qi + 1, q, why, answered, opts: opts.map((label, oi) => {
+        const ok = answered && oi === right, bad = answered && oi === a && a !== right;
+        return { label, pressed: a === oi ? "true" : "false", bg: ok ? "oklch(0.5 0.12 150)" : bad ? "oklch(0.58 0.17 40)" : "transparent", fg: ok || bad ? "#fff" : "#17160f", mark: ok ? "Correct" : bad ? "Not quite" : "",
+          pick: () => !answered && this.answer(qi, oi, st) };
+      }) };
+    });
+    const done = Object.keys(ans).length, sp = this.state.speaking;
+    return { ...base, hasStory: true, tabs, quiz,
+      chapter: { n: c + 1, title: d.CHAPTERS[c][0], text: st.ch[c] },
+      canSpeak: "speechSynthesis" in window, speakOn: sp ? "true" : "false", speakLabel: sp ? "■ Stop reading" : "▶ Read aloud",
+      speakBg: sp ? "#17160f" : "transparent", speakFg: sp ? "#f2f0eb" : "#17160f",
+      speakChap: () => this.speak(`${d.CHAPTERS[c][0]}. ${st.ch[c]}`),
+      prevOp: c === 0 ? 0.35 : 1, nextLabel: c === 4 ? "Take the quiz ↓" : "Next chapter →",
+      prevChap: () => this.goChap(Math.max(0, c - 1)),
+      nextChap: () => { if (c < 4) this.goChap(c + 1); else { const q = this.quizRef.current, g = this.dlgRef.current; q && g && g.scrollTo({ top: q.offsetTop - 64, behavior: "smooth" }); } },
+      scoreLabel: done === st.quiz.length ? `You got ${score} of ${st.quiz.length}` : `${done} of ${st.quiz.length} answered`,
+      resetQuiz: () => this.setState({ ans: {} }) };
+  }
+}
+</script>
+</body>
+</html>

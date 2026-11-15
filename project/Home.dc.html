@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#f2f0eb;-webkit-font-smoothing:antialiased}a{color:#17160f;text-decoration:none}a:hover{color:oklch(0.58 0.17 40)}</style>
+</helmet>
+<div style="background:#f2f0eb;color:#17160f;font-family:'IBM Plex Sans',sans-serif;min-height:100vh">
+
+<header style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,56px);border-bottom:1px solid #17160f">
+<div style="display:flex;flex-wrap:wrap;gap:14px;align-items:baseline"><a href="#about" style="font-weight:600;font-size:18px;letter-spacing:-.01em;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px">SoughtOut Beyond</a><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">Stories of the machines left on the Moon and Mars</span></div>
+<nav style="display:flex;flex-wrap:wrap;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:13px"><a href="#catalog" style="white-space:nowrap">01 Moon</a><a href="#catalog" style="white-space:nowrap">02 Mars</a><a href="#catalog" style="white-space:nowrap">03 Deep space</a><a href="Resting Places.dc.html" style="white-space:nowrap">04 Map</a><a href="#lifespans" style="white-space:nowrap">05 Timeline</a><a href="#sources" style="white-space:nowrap">06 Sources</a></nav>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:13px">
+<div title="Machines you’ve explored" style="display:flex;align-items:center;gap:10px;padding:0 12px;min-height:44px;box-sizing:border-box;border:1px solid #17160f;background:{{ badgeBg }};color:{{ badgeFg }}">
+<span aria-hidden="true" style="display:grid;grid-template-columns:repeat(8,7px);gap:2px"><sc-for list="{{ pips }}" as="p" hint-placeholder-count="16"><span style="width:7px;height:7px;background:{{ p.bg }};box-shadow:inset 0 0 0 1px {{ badgeFg }}"></span></sc-for></span>
+<span style="white-space:nowrap">{{ badgeLabel }}</span>
+</div>
+<button onClick="{{ toggleBig }}" aria-pressed="{{ bigOn }}" aria-label="Larger text" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;min-width:44px;padding:0 12px;display:flex;align-items:center;justify-content:center;border:1px solid #17160f;background:{{ bigBg }};color:{{ bigFg }}" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">A+</button>
+<button onClick="{{ toggleHc }}" aria-pressed="{{ hcOn }}" style="all:unset;cursor:pointer;box-sizing:border-box;min-height:44px;padding:0 12px;display:flex;align-items:center;border:1px solid #17160f;background:{{ hcBg }};color:{{ hcFg }}" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">High contrast</button>
+</div>
+</header>
+
+<section id="about" aria-label="Prologue" style="background:#17160f;color:#f2f0eb;border-bottom:1px solid #17160f;display:flex;flex-direction:column;min-height:min(92vh,880px);scroll-margin-top:0;background-image:radial-gradient(circle at 1px 1px,#f2f0eb22 1px,transparent 0);background-size:28px 28px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:20px clamp(20px,4vw,56px);border-bottom:1px solid #f2f0eb33;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#b9b5aa;opacity:{{ fade.op }};transition:opacity .9s ease 0.1s">
+<span>Prologue · Before the catalog</span><span>Isaiah 62:12 · King James Version</span>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,4vw,48px);padding:clamp(48px,7vw,96px) clamp(20px,4vw,56px)">
+<blockquote style="margin:0;max-width:1100px;display:flex;flex-direction:column;gap:20px">
+<p style="margin:0;font-size:clamp(30px,4.4vw,60px);line-height:1.08;font-weight:500;letter-spacing:-.03em;text-wrap:balance"><span style="display:block;opacity:{{ fade.op }};transform:{{ fade.tf }};transition:opacity .9s ease 0.3s,transform .9s ease 0.3s">“And they shall call them, The holy people,</span><span style="display:block;opacity:{{ fade.op }};transform:{{ fade.tf }};transition:opacity .9s ease 0.8s,transform .9s ease 0.8s">The redeemed of the LORD:</span><span style="display:block;opacity:{{ fade.op }};transform:{{ fade.tf }};transition:opacity .9s ease 1.3s,transform .9s ease 1.3s">and thou shalt be called, <span style="color:oklch(0.72 0.16 45)">Sought out</span>,</span><span style="display:block;opacity:{{ fade.op }};transform:{{ fade.tf }};transition:opacity .9s ease 1.8s,transform .9s ease 1.8s">A city not forsaken.”</span></p>
+<cite style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-style:normal;color:#b9b5aa;opacity:{{ fade.op }};transition:opacity .9s ease 2.3s">— Isaiah 62:12</cite>
+</blockquote>
+<div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);align-items:flex-end;border-top:1px solid #f2f0eb33;padding-top:clamp(24px,3vw,40px);opacity:{{ fade.op }};transform:{{ fade.tf }};transition:opacity .9s ease 2.7s,transform .9s ease 2.7s">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px;max-width:640px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:oklch(0.72 0.16 45)">About the project</span>
+<h2 style="margin:0;font-size:clamp(28px,3vw,40px);font-weight:500;letter-spacing:-.03em;line-height:1.05">Why SoughtOut Beyond?</h2>
+<p style="margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#d9d5ca;text-wrap:pretty">The name comes from this verse. To be sought out is to be looked for and not forgotten. These machines were left behind, but they are not forsaken. SoughtOut Beyond goes looking for them and tells their stories.</p>
+</div>
+<a href="#begin" style="background:oklch(0.72 0.16 45);color:#17160f;padding:16px 22px;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;white-space:nowrap" style-hover="background:#f2f0eb;color:#17160f">Go looking ↓</a>
+</div>
+</div>
+<div aria-hidden="true" style="opacity:{{ fade.op }};transition:opacity .9s ease 3.1s;display:flex;flex-wrap:wrap;gap:8px 28px;padding:16px clamp(20px,4vw,56px);border-top:1px solid #f2f0eb33;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8f8b80">
+<span>0.67° N 23.47° E · Tranquility Base</span><span>26.13° N 3.63° E · Hadley–Apennine</span><span>1.95° S 5.53° W · Perseverance Valley</span><span>18.44° N 77.45° E · Jezero</span><span>68.22° N 125.75° W · Vastitas Borealis</span><span>Ceres orbit · Dawn</span>
+</div>
+</section>
+
+<section id="begin" style="display:flex;flex-wrap:wrap;border-bottom:1px solid #17160f;gap:1px;background:#17160f">
+<div style="flex:2 1 560px;min-width:0;background:#f2f0eb;padding:clamp(40px,6vw,80px) clamp(20px,4vw,56px) 48px;display:flex;flex-direction:column;gap:32px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">16 machines · Moon, Mars, asteroids &amp; deep space · told in their own words</div>
+<h1 style="margin:0;font-size:clamp(48px,7vw,96px);line-height:.98;font-weight:500;letter-spacing:-.035em;text-wrap:balance">We left robots on other worlds. Here’s what they found.</h1>
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end">
+<p style="margin:0;font-size:18px;line-height:1.55;max-width:460px;color:#3b3930;text-wrap:pretty">Rovers, landers, a helicopter, a mirror and probes still drifting through space. Pick one and it will tell you why it was sent, how it got there, what it discovered, and how its mission ended.</p>
+<a href="#catalog" style="background:#17160f;color:#f2f0eb;padding:14px 20px;font-family:'IBM Plex Mono',monospace;font-size:14px;white-space:nowrap">Meet the machines →</a>
+</div>
+</div>
+<div style="flex:1 1 320px;min-width:0;background:#f2f0eb;display:flex;flex-direction:column">
+<div style="padding:20px 28px;border-bottom:1px solid #17160f;display:flex;justify-content:space-between;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap"><span>MRS-001 · Opportunity</span><span style="color:oklch(0.58 0.17 40)">● Silent</span></div>
+<div style="padding:32px 28px;display:flex;flex-direction:column;gap:8px;flex:1;justify-content:center;border-bottom:1px solid #17160f">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Days without a signal</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(64px,7vw,88px);font-weight:500;letter-spacing:-.04em;line-height:1;color:oklch(0.58 0.17 40)">{{ oppDays }}</div>
+<div style="font-size:15px;line-height:1.5;color:#3b3930;margin-top:10px">Last heard Jun 10, 2018, during a planet-wide dust storm.</div>
+</div>
+<div style="padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">LUN-001 · Years reflecting lasers</div>
+<div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:40px;font-weight:500;letter-spacing:-.03em;color:oklch(0.5 0.12 150)">{{ llrYears }}</span><span style="font-size:15px;color:#3b3930">and still working</span></div>
+</div>
+</div>
+</section>
+
+<section id="catalog" style="border-bottom:1px solid #17160f">
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,56px);border-bottom:1px solid #17160f">
+<div style="display:flex;gap:14px;align-items:baseline"><h2 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-.02em">The catalog</h2><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">{{ countLabel }}</span></div>
+<div style="display:flex;border:1px solid #17160f;font-family:'IBM Plex Mono',monospace;font-size:13px">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+<button onClick="{{ f.pick }}" aria-pressed="{{ f.on }}" style="all:unset;cursor:pointer;padding:12px 18px;background:{{ f.bg }};color:{{ f.fg }}" style-focus="outline:3px solid oklch(0.58 0.17 40);outline-offset:2px">{{ f.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(max(min(100%,340px),calc(33.34% - 1px)),1fr));margin-bottom:-1px">
+<sc-for list="{{ items }}" as="c" hint-placeholder-count="6">
+<a href="{{ c.href }}" onClick="{{ c.open }}" aria-label="{{ c.aria }}" style="cursor:pointer;background:#f2f0eb;box-shadow:1px 0 0 #17160f,0 1px 0 #17160f;padding:24px;display:flex;flex-direction:column;gap:14px;color:#17160f;outline-offset:-4px" style-hover="background:#e9e6de" style-focus="outline:3px solid #17160f">
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px"><span>{{ c.code }}</span><span style="color:{{ c.statusColor }};white-space:nowrap">● {{ c.statusLabel }}</span></div>
+<div role="img" aria-label="{{ c.alt }}" style="aspect-ratio:4/3;background:#d9d5ca center/cover no-repeat;background-image:{{ c.bg }};filter:{{ imgFilter }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">{{ c.imgNote }}</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.15">{{ c.name }}</div>
+<div style="font-size:15px;line-height:1.5;color:#3b3930;text-wrap:pretty">{{ c.tagline }}</div>
+</div>
+<div style="font-size:16px;line-height:1.5;padding:14px 16px;background:#e6e2d8;text-wrap:pretty">“{{ c.voice }}”</div>
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #17160f33;padding-top:12px;margin-top:auto">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">What it discovered</span>
+<span style="font-size:15px;line-height:1.45">{{ c.found }}</span>
+</div>
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px"><span style="color:#6b685e">{{ c.mission }} · {{ c.when }}</span><span style="white-space:nowrap">{{ c.cta }}</span></div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section style="padding:48px clamp(20px,4vw,56px);border-bottom:1px solid #17160f;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:baseline">
+<h2 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-.02em">Every story has five chapters</h2>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Then a 3-question quiz</span>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:1px;background:#17160f;border:1px solid #17160f">
+<sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="5">
+<li style="flex:1 1 160px;background:#f2f0eb;padding:20px;display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">0{{ ch.n }}</span>
+<span style="font-size:19px;font-weight:500;letter-spacing:-.01em">{{ ch.title }}</span>
+<span style="font-size:15px;line-height:1.45;color:#3b3930">{{ ch.q }}</span>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<section id="lifespans" style="padding:48px clamp(20px,4vw,56px);border-bottom:1px solid #17160f;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:baseline">
+<h2 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-.02em">Working lives, 1965–today</h2>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Arrival → last signal</span>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ lives }}" as="l" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:minmax(120px,220px) minmax(0,1fr);gap:20px;align-items:center;padding:12px 0;border-top:1px solid #17160f33">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">{{ l.name }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">{{ l.span }}</span></div>
+<div style="position:relative;height:14px;background:repeating-linear-gradient(90deg,#17160f1f 0 1px,transparent 1px 16.39%)">
+<div style="position:absolute;top:3px;height:8px;left:{{ l.left }};width:{{ l.width }};min-width:4px;background:{{ l.color }}"></div>
+</div>
+</div>
+</sc-for>
+<div style="display:grid;grid-template-columns:minmax(120px,220px) minmax(0,1fr);gap:20px;border-top:1px solid #17160f;padding-top:8px">
+<span></span>
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e"><span>1965</span><span>1975</span><span>1985</span><span>1995</span><span>2005</span><span>2015</span><span>Now</span></div>
+</div>
+</div>
+</section>
+
+<sc-if value="{{ hasOpen }}" hint-placeholder-val="{{ false }}">
+<dc-import name="MachineSheet" code="{{ openCode }}" on-close="{{ close }}" on-pick="{{ pick }}" hint-size="0px,0px"></dc-import>
+</sc-if>
+
+<section id="how" style="border-top:1px solid #17160f;display:flex;flex-wrap:wrap;gap:1px;background:#17160f;scroll-margin-top:0">
+<div style="flex:1 1 260px;min-width:0;background:#f2f0eb;padding:clamp(32px,4vw,48px) clamp(20px,4vw,56px);display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">How it works</span>
+<h2 style="margin:0;font-size:clamp(28px,3vw,40px);font-weight:500;letter-spacing:-.03em;line-height:1.05">Looked for, not forgotten.</h2>
+<a href="#about" style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-decoration:underline;text-underline-offset:3px">↑ Read the prologue</a>
+</div>
+<div style="flex:2 1 480px;min-width:0;background:#f2f0eb;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:#17160f">
+<div style="background:#f2f0eb;padding:28px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">01 · The idea</span><span style="font-size:17px;line-height:1.5">Robots and hardware are still sitting on the Moon, Mars and out in space. Most people don’t know they’re there.</span></div>
+<div style="background:#f2f0eb;padding:28px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">02 · How it connects</span><span style="font-size:17px;line-height:1.5">Each machine tells its own story in five chapters: why it went, how it got there, what it found, how it ended and why it still matters.</span></div>
+<div style="background:#f2f0eb;padding:28px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">03 · Who it’s for</span><span style="font-size:17px;line-height:1.5">Students and curious readers. Short chapters, a map of where each one rests and a quick quiz make the science easy to remember.</span></div>
+<div style="background:#f2f0eb;padding:28px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">04 · Why trust it</span><span style="font-size:17px;line-height:1.5">Every fact is checked against NASA, JPL or NSSDCA mission pages, and the sources are listed.</span></div>
+</div>
+</section>
+
+<footer id="sources" style="display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;padding:28px clamp(20px,4vw,56px) 40px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#3b3930">
+<span>Every fact comes from a NASA, JPL or NSSDCA page, listed at the end of each story.</span>
+<span style="color:#6b685e">Images: NASA, public domain</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;grayscale&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;oklch(0.58 0.17 40)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;oklch(0.58 0.17 40)&quot;,&quot;#c2410c&quot;,&quot;#1d4ed8&quot;,&quot;#17160f&quot;]}}">
+class Component extends DCLogic {
+  state = { filter: "all", open: null, d: null, prog: {}, a11y: { big: false, hc: false }, intro: false };
+  readJSON(k, f) { try { return JSON.parse(localStorage.getItem(k)) || f; } catch (e) { return f; } }
+  applyA11y(a) { const r = document.documentElement.style; r.zoom = a.big ? "1.2" : ""; r.filter = a.hc ? "contrast(1.4)" : ""; }
+  toggleA11y(k) { const a = { ...this.state.a11y, [k]: !this.state.a11y[k] }; localStorage.setItem("soughtout.a11y", JSON.stringify(a)); this.applyA11y(a); this.setState({ a11y: a }); }
+  componentDidMount() {
+    import("./machines.js").then(d => this.setState({ d }));
+    const a = this.readJSON("soughtout.a11y", { big: false, hc: false }); this.applyA11y(a);
+    this._p = () => this.setState({ prog: this.readJSON("soughtout.progress", {}) });
+    addEventListener("soughtout-progress", this._p); addEventListener("storage", this._p);
+    const hm = location.hash.match(/^#m=([A-Z]{3}-\d{3})$/);
+    this.setState({ a11y: a, prog: this.readJSON("soughtout.progress", {}), open: hm ? hm[1] : null });
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) this.setState({ intro: true });
+    else this._raf = requestAnimationFrame(() => { this._raf = requestAnimationFrame(() => this.setState({ intro: true })); });
+  }
+  componentWillUnmount() { removeEventListener("soughtout-progress", this._p); removeEventListener("storage", this._p); cancelAnimationFrame(this._raf); }
+  renderVals() {
+    const now = new Date(), { d, a11y, prog } = this.state;
+    const explored = prog.explored || {}, best = prog.best || {};
+    const tog = on => ({ bg: on ? "#17160f" : "transparent", fg: on ? "#f2f0eb" : "#17160f", on: on ? "true" : "false" });
+    const big = tog(a11y.big), hc = tog(a11y.hc);
+    const base = {
+      oppDays: Math.floor((now - Date.parse("2018-06-10")) / 864e5).toLocaleString(),
+      llrYears: Math.floor((now - Date.parse("1969-07-21")) / 3.15576e10),
+      fade: { op: this.state.intro ? 1 : 0, tf: this.state.intro ? "none" : "translateY(14px)" },
+      bigOn: big.on, bigBg: big.bg, bigFg: big.fg, hcOn: hc.on, hcBg: hc.bg, hcFg: hc.fg,
+      toggleBig: () => this.toggleA11y("big"), toggleHc: () => this.toggleA11y("hc"),
+      chapters: [["The Mission","Why was it sent?"],["The Journey","How did it get there?"],["The Discovery","What did it find?"],["The Final Signal","How did its mission end?"],["The Legacy","Why does it still matter?"]].map(([title, q], i) => ({ n: i + 1, title, q })),
+      openCode: this.state.open, hasOpen: !!this.state.open,
+      close: () => this.setState({ open: null }), pick: code => this.setState({ open: code }),
+      imgFilter: (this.props.grayscale ?? false) ? "grayscale(1) contrast(1.05)" : "none",
+    };
+    if (!d) return { ...base, items: [], lives: [], filters: [], countLabel: "", pips: Array.from({ length: 16 }, () => ({ bg: "transparent" })), badgeLabel: "0 explored", badgeBg: "transparent", badgeFg: "#17160f" };
+    const accent = this.props.accent ?? "oklch(0.58 0.17 40)";
+    const S = { ...d.STATUS, silent: [d.STATUS.silent[0], accent] };
+    const M = d.MACHINES;
+    const nowY = now.getFullYear() + now.getMonth() / 12, y0 = 1965, span = nowY - y0;
+    const pct = v => ((v - y0) / span * 100).toFixed(2) + "%";
+    const f = this.state.filter;
+    const items = M.filter(m => f === "all" || m.dest === f).map(m => {
+      const b = best[m.code], ex = explored[m.code];
+      return { ...m, bg: m.img ? `url(${m.img})` : "none", imgNote: m.img ? "" : "NASA photo to add", when: d.when(m),
+        statusLabel: S[m.status][0], statusColor: S[m.status][1], aria: `${m.name}, ${S[m.status][0]}. Read its story`, href: "#",
+        cta: b != null ? `✓ Quiz ${b}/3 · Open →` : ex ? "✓ Explored · Open →" : "Tell me about it →",
+        open: e => { e.preventDefault(); this.setState({ open: m.code }); } };
+    });
+    const lives = [...M].sort((x, y) => x.a - y.a).map(m => {
+      const end = m.e ?? nowY;
+      return { name: m.name, color: S[m.status][1], left: pct(m.a), width: ((end - m.a) / span * 100).toFixed(2) + "%",
+        span: m.e ? `${Math.floor(m.a)}–${Math.floor(m.e)}` : `${Math.floor(m.a)}–today` };
+    });
+    const filters = [["all", `All ${M.length}`], ["moon", "Moon"], ["mars", "Mars"], ["deep", "Deep space"]].map(([k, label]) => ({
+      label, on: f === k ? "true" : "false", bg: f === k ? "#17160f" : "transparent", fg: f === k ? "#f2f0eb" : "#17160f",
+      pick: () => this.setState({ filter: k }),
+    }));
+    const n = M.filter(m => explored[m.code]).length, q = M.filter(m => best[m.code] != null).length, all = n === M.length;
+    return { ...base, items, lives, filters,
+      countLabel: `${items.length} object${items.length === 1 ? "" : "s"}`,
+      pips: M.map(m => ({ bg: explored[m.code] ? (all ? "#f2f0eb" : "#17160f") : "transparent" })),
+      badgeLabel: all ? `★ All ${M.length} explored` : `${n}/${M.length} explored${q ? ` · ${q} quiz${q === 1 ? "" : "zes"}` : ""}`,
+      badgeBg: all ? "#17160f" : "transparent", badgeFg: all ? "#f2f0eb" : "#17160f" };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a1a1c;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:hover{opacity:.8}</style>
+</helmet>
+<section style="padding:64px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px;font-family:'Geist',sans-serif;color:#e8e8ea">
+<div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8a8a90">Turn 1 · SoughtOut Beyond style directions</div>
+<div style="font-size:28px;font-weight:500">Three directions, same content: home hero + mission cards</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+<!-- 1a OBSERVATORY -->
+<div id="1a" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:10px;align-items:center;font-family:'Geist Mono',monospace;font-size:13px;color:#e8e8ea"><span style="background:#e6ff4a;color:#05060b;padding:3px 8px;border-radius:4px;font-weight:500">1a</span>Observatory — refined dark, museum after hours</div>
+<div style="width:1280px;background:#05060b;color:#f4f6fb;font-family:'Geist',sans-serif;position:relative;overflow:hidden;background-image:radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 74% 9%,#fff6 50%,transparent 51%),radial-gradient(1px 1px at 88% 42%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 33% 61%,#fff4 50%,transparent 51%),radial-gradient(1.5px 1.5px at 56% 28%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 6% 80%,#fff5 50%,transparent 51%)">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:28px 56px;border-bottom:1px solid #ffffff14">
+<div style="font-family:'Instrument Serif',serif;font-size:26px">SoughtOut <span style="font-style:italic;color:#c9cfdd">Beyond</span></div>
+<div style="display:flex;gap:32px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#c9cfdd"><span>The Moon</span><span>Mars</span><span>Timeline</span><span>About</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1.3fr 1fr;gap:56px;padding:96px 56px 80px;align-items:end">
+<div style="display:flex;flex-direction:column;gap:28px">
+<div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:#8a92a8">An archive of 6 machines · Moon &amp; Mars</div>
+<div style="font-family:'Instrument Serif',serif;font-size:112px;line-height:.92;letter-spacing:-.01em;text-wrap:balance">The machines we <span style="font-style:italic;color:#a9c8ff">left</span> <span style="font-style:italic;color:#ffb38a">behind.</span></div>
+<div style="font-size:19px;line-height:1.55;color:#c9cfdd;max-width:520px;text-wrap:pretty">Rovers, landers and mirrors still sitting where we parked them. Each one tells its own story, in its own words.</div>
+<div style="display:flex;gap:12px"><span style="background:#e6ff4a;color:#05060b;padding:14px 22px;border-radius:999px;font-weight:500;font-size:15px">Start exploring</span><span style="border:1px solid #ffffff2e;padding:14px 22px;border-radius:999px;font-size:15px">Meet the machines</span></div>
+</div>
+<div style="border:1px solid #ffffff1a;border-radius:20px;padding:28px;background:#0a0c16b3;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;align-items:center;gap:10px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#ff8a52"><span style="width:8px;height:8px;border-radius:50%;background:#ff8a52;box-shadow:0 0 0 4px #ff8a5233"></span>MRS-001 · Opportunity</div>
+<div style="font-family:'Instrument Serif',serif;font-size:96px;line-height:1">{{ days }}</div>
+<div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#8a92a8">days since last signal</div>
+<div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;line-height:1.35;color:#c9cfdd;border-top:1px solid #ffffff14;padding-top:18px">“My job was 90 days and about one kilometer. I drove 45.”</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:0 56px 72px">
+<sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+<div style="border:1px solid #ffffff1a;border-radius:16px;overflow:hidden;background:#0a0c16b3;display:flex;flex-direction:column">
+<div style="aspect-ratio:4/3;background:#12152a center/cover no-repeat;background-image:{{ c.bg }};position:relative"><span style="position:absolute;left:14px;top:14px;background:#05060bb3;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.25em;padding:4px 8px;border-radius:4px;color:#c9cfdd">{{ c.code }}</span></div>
+<div style="padding:22px;display:flex;flex-direction:column;gap:10px">
+<div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a92a8">{{ c.mission }} · {{ c.statusLabel }}</div>
+<div style="font-family:'Instrument Serif',serif;font-size:30px;line-height:1.05">{{ c.name }}</div>
+<div style="color:#c9cfdd;font-size:15px;line-height:1.5">{{ c.tagline }}</div>
+</div></div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- 1b FIELD ARCHIVE -->
+<div id="1b" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:10px;align-items:center;font-family:'Geist Mono',monospace;font-size:13px;color:#e8e8ea"><span style="background:#e6ff4a;color:#05060b;padding:3px 8px;border-radius:4px;font-weight:500">1b</span>Field Archive — paper, ink, catalog tags</div>
+<div style="width:1280px;background:#f2f0eb;color:#17160f;font-family:'IBM Plex Sans',sans-serif">
+<div style="display:grid;grid-template-columns:1fr auto;align-items:center;padding:22px 56px;border-bottom:1px solid #17160f">
+<div style="display:flex;gap:14px;align-items:baseline"><span style="font-weight:600;font-size:18px;letter-spacing:-.01em">SoughtOut Beyond</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">Catalog of hardware left off-world</span></div>
+<div style="display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:13px"><span>01 Moon</span><span>02 Mars</span><span>03 Timeline</span><span>04 Sources</span></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border-bottom:1px solid #17160f">
+<div style="grid-column:span 8;padding:72px 56px 56px;border-right:1px solid #17160f;display:flex;flex-direction:column;gap:32px">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Vol. 1 — 6 objects, 2 worlds, 1969–2024</div>
+<div style="font-size:88px;line-height:.98;font-weight:500;letter-spacing:-.035em;text-wrap:balance">The machines we left behind, catalogued.</div>
+<div style="display:flex;gap:40px;align-items:flex-end">
+<div style="font-size:18px;line-height:1.55;max-width:440px;color:#3b3930;text-wrap:pretty">Every rover, lander and mirror still where we parked it. Every fact traced to a NASA source.</div>
+<span style="background:#17160f;color:#f2f0eb;padding:14px 20px;font-family:'IBM Plex Mono',monospace;font-size:14px;white-space:nowrap">Open the catalog →</span>
+</div>
+</div>
+<div style="grid-column:span 4;display:flex;flex-direction:column">
+<div style="padding:28px 32px;border-bottom:1px solid #17160f;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:13px"><span>MRS-001</span><span style="color:oklch(0.58 0.17 40)">● Silent</span></div>
+<div style="padding:32px;display:flex;flex-direction:column;gap:8px;flex:1;justify-content:center">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Opportunity, days without signal</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:84px;font-weight:500;letter-spacing:-.04em;line-height:1;color:oklch(0.58 0.17 40)">{{ days }}</div>
+<div style="font-size:15px;line-height:1.5;color:#3b3930;margin-top:12px">Last heard Jun 10, 2018. Resting in Perseverance Valley.</div>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr))">
+<sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+<div style="padding:28px;border-right:1px solid #17160f;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px"><span>{{ c.code }}</span><span style="color:#6b685e">{{ c.statusLabel }}</span></div>
+<div style="aspect-ratio:4/3;background:#d9d5ca center/cover no-repeat;background-image:{{ c.bg }};filter:grayscale(1) contrast(1.05)"></div>
+<div style="font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.15">{{ c.name }}</div>
+<div style="font-size:15px;line-height:1.5;color:#3b3930">{{ c.tagline }}</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e;border-top:1px solid #17160f33;padding-top:12px">{{ c.mission }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- 1c MISSION CONTROL -->
+<div id="1c" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:10px;align-items:center;font-family:'Geist Mono',monospace;font-size:13px;color:#e8e8ea"><span style="background:#e6ff4a;color:#05060b;padding:3px 8px;border-radius:4px;font-weight:500">1c</span>Mission Control — loud, chunky, made for kids</div>
+<div style="width:1280px;background:#0c0c0e;color:#f5f4f0;font-family:'Archivo',sans-serif;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px">
+<div style="font-weight:900;font-stretch:125%;font-size:22px;text-transform:uppercase;letter-spacing:-.01em">SoughtOut<span style="color:#e6ff4a">/</span>Beyond</div>
+<div style="display:flex;gap:8px;font-weight:600;font-size:15px"><span style="background:#1e1e22;padding:10px 18px;border-radius:999px">Moon</span><span style="background:#1e1e22;padding:10px 18px;border-radius:999px">Mars</span><span style="background:#e6ff4a;color:#0c0c0e;padding:10px 18px;border-radius:999px">Take the quiz</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1.5fr 1fr;gap:12px">
+<div style="background:#1a1a1e;border-radius:28px;padding:48px;display:flex;flex-direction:column;gap:28px;justify-content:space-between;min-height:440px">
+<div style="font-weight:600;font-size:15px;color:#a5a49e">6 robots. 2 worlds. Still out there.</div>
+<div style="font-weight:900;font-stretch:118%;font-size:96px;line-height:.88;text-transform:uppercase;letter-spacing:-.03em">We left robots on other worlds.</div>
+<div style="font-size:20px;line-height:1.45;color:#d4d3cd;max-width:520px">Find out what they did, what they found, and where they are right now.</div>
+</div>
+<div style="display:grid;grid-template-rows:1fr auto;gap:12px">
+<div style="background:oklch(0.68 0.19 42);color:#0c0c0e;border-radius:28px;padding:36px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.06em">Opportunity has been quiet for</div>
+<div style="font-weight:900;font-stretch:125%;font-size:120px;line-height:.85;letter-spacing:-.04em">{{ days }}</div>
+<div style="font-weight:700;font-size:22px">days and counting.</div>
+</div>
+<div style="background:oklch(0.68 0.13 255);color:#0c0c0e;border-radius:28px;padding:24px 36px;font-weight:700;font-size:18px;line-height:1.35">The Apollo 11 mirror is still working. 57 years, zero batteries.</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+<sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+<div style="background:#1a1a1e;border-radius:28px;overflow:hidden;display:flex;flex-direction:column">
+<div style="aspect-ratio:16/10;background:#2a2a30 center/cover no-repeat;background-image:{{ c.bg }};margin:10px;border-radius:20px"></div>
+<div style="padding:12px 26px 28px;display:flex;flex-direction:column;gap:10px">
+<span style="align-self:flex-start;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-radius:999px;background:{{ c.chip }};color:#0c0c0e">{{ c.statusLabel }}</span>
+<div style="font-weight:800;font-stretch:112%;font-size:28px;line-height:1;text-transform:uppercase;letter-spacing:-.02em">{{ c.name }}</div>
+<div style="font-size:16px;line-height:1.45;color:#d4d3cd">{{ c.tagline }}</div>
+</div></div>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const J = "https://d2pn8kiwq2w21t.cloudfront.net/original_images";
+    const days = Math.floor((Date.now() - Date.parse("2018-06-10")) / 864e5).toLocaleString();
+    const cards = [
+      { code: "MRS-001", mission: "Mars Exploration Rover", name: "Opportunity", statusLabel: "Silent", chip: "oklch(0.68 0.19 42)", tagline: "Built to last 90 days. It kept going for almost 15 years.", img: `${J}/jpegPIA06739.jpg` },
+      { code: "LUN-001", mission: "Apollo 11", name: "Laser Ranging Retroreflector", statusLabel: "Still working", chip: "#e6ff4a", tagline: "A mirror on the Moon that scientists still shoot lasers at today.", img: "https://www.nasa.gov/wp-content/uploads/2020/03/aldrin20190724.jpg" },
+      { code: "MRS-002", mission: "Mars 2020", name: "Ingenuity Helicopter", statusLabel: "Retired", chip: "oklch(0.68 0.13 255)", tagline: "The first aircraft to fly on another planet. Named by a high school student.", img: `${J}/1-PIA25968-Fig-A-crop.jpg` },
+    ].map(c => ({ ...c, bg: `url(${c.img})` }));
+    return { days, cards };
+  }
+}
+</script>
+</body>
+</html>

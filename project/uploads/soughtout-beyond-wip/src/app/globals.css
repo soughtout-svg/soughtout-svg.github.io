@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/*
+ * SoughtOut Beyond design tokens.
+ * Deep space base, silver type, blue for the Moon, rust orange for Mars,
+ * and a signal yellow reserved for actions and "still alive" markers.
+ */
+@theme inline {
+  --color-space-950: #05060b;
+  --color-space-900: #0a0c16;
+  --color-space-800: #12152a;
+  --color-space-700: #1c2140;
+  --color-space-600: #2a3158;
+
+  --color-silver-50: #f4f6fb;
+  --color-silver-200: #c9cfdd;
+  --color-silver-400: #8a92a8;
+  --color-silver-600: #555c70;
+
+  --color-moon-300: #a9c8ff;
+  --color-moon-400: #7aa8ff;
+  --color-moon-500: #4f86f7;
+
+  --color-mars-300: #ffb38a;
+  --color-mars-400: #ff8a52;
+  --color-mars-500: #e8622c;
+
+  --color-signal: #e6ff4a;
+
+  --font-display: var(--font-instrument), Georgia, serif;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-space-950);
+  color: var(--color-silver-50);
+}
+
+::selection {
+  background: var(--color-moon-500);
+  color: var(--color-space-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Slow orbit used by the home page scene. */
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The "still alive" pulse used on status dots. */
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

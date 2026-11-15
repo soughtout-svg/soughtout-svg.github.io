@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#f2f0eb;-webkit-font-smoothing:antialiased}a{color:#17160f;text-decoration:none}a:hover{color:oklch(0.58 0.17 40)}</style>
+</helmet>
+<div style="background:#f2f0eb;color:#17160f;font-family:'IBM Plex Sans',sans-serif;min-height:100vh">
+
+<header style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,56px);border-bottom:1px solid #17160f">
+<a href="Home.dc.html" style="display:flex;flex-wrap:wrap;gap:14px;align-items:baseline"><span style="font-weight:600;font-size:18px;letter-spacing:-.01em">SoughtOut Beyond</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">Stories of the machines left on the Moon and Mars</span></a>
+<nav style="display:flex;flex-wrap:wrap;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:13px"><a href="Home.dc.html#catalog" style="white-space:nowrap">← All machines</a><a href="Home.dc.html#about" style="white-space:nowrap">Prologue</a><a href="#credits" style="white-space:nowrap">Map sources</a></nav>
+</header>
+
+<section style="padding:clamp(40px,5vw,72px) clamp(20px,4vw,56px) 32px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #17160f">
+<div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Map · where each machine stopped for good</span>
+<h1 style="margin:0;font-size:clamp(44px,6vw,80px);line-height:.98;font-weight:500;letter-spacing:-.035em;text-wrap:balance">Where they rest.</h1>
+<p style="margin:0;font-size:18px;line-height:1.55;color:#3b3930;text-wrap:pretty">Every dot is a real landing site on a real NASA map, plotted by latitude and longitude. Tap one to open its story.</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 20px;font-family:'IBM Plex Mono',monospace;font-size:13px">
+<sc-for list="{{ legend }}" as="l" hint-placeholder-count="4">
+<span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:{{ l.color }};box-shadow:0 0 0 2px #f2f0eb,0 0 0 3px #17160f"></span>{{ l.label }}</span>
+</sc-for>
+</div>
+</section>
+
+<section style="display:flex;flex-wrap:wrap;gap:1px;background:#17160f;border-bottom:1px solid #17160f">
+<sc-for list="{{ worlds }}" as="w" hint-placeholder-count="2">
+<div style="flex:1 1 480px;min-width:0;background:#f2f0eb;padding:24px clamp(20px,3vw,40px) 32px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><h2 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-.02em">{{ w.name }}</h2><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">{{ w.count }}</span></div>
+<div style="position:relative;aspect-ratio:2/1;background:#2a2925 center/100% 100% no-repeat;background-image:{{ w.bg }};border:1px solid #17160f">
+<div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(#f2f0eb2b 1px,transparent 1px),linear-gradient(90deg,#f2f0eb2b 1px,transparent 1px);background-size:8.333% 16.666%"></div>
+<div aria-hidden="true" style="position:absolute;left:0;right:0;top:50%;border-top:1px dashed #f2f0eb80"></div>
+<div aria-hidden="true" style="position:absolute;top:0;bottom:0;left:50%;border-left:1px dashed #f2f0eb80"></div>
+<sc-for list="{{ w.sites }}" as="s" hint-placeholder-count="4">
+<button onClick="{{ s.pick }}" aria-label="{{ s.aria }}" title="{{ s.name }}" style="all:unset;cursor:pointer;position:absolute;left:{{ s.x }};top:{{ s.y }};width:44px;height:44px;margin:-22px 0 0 -22px;display:flex;align-items:center;justify-content:center;z-index:{{ s.z }}" style-focus="outline:3px solid #f2f0eb;outline-offset:-8px">
+<span style="width:{{ s.size }};height:{{ s.size }};border-radius:50%;background:{{ s.color }};box-shadow:0 0 0 2px #f2f0eb,0 0 0 3px #17160f"></span>
+</button>
+<span style="position:absolute;z-index:3;left:{{ s.x }};top:{{ s.y }};transform:{{ s.labelShift }};font-family:'IBM Plex Mono',monospace;font-size:11px;background:#f2f0ebe6;border:1px solid #17160f;padding:1px 5px;white-space:nowrap;pointer-events:none;display:{{ s.labelDisplay }}">{{ s.label }}</span>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b685e"><span>180° W</span><span>90° W</span><span>0°</span><span>90° E</span><span>180° E</span></div>
+</div>
+</sc-for>
+</section>
+
+<section style="padding:40px clamp(20px,4vw,56px) 48px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:baseline">
+<h2 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-.02em">Off the map</h2>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b685e">Not on the Moon or Mars</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:#17160f;border:1px solid #17160f">
+<sc-for list="{{ elsewhere }}" as="e" hint-placeholder-count="4">
+<button onClick="{{ e.pick }}" style="all:unset;cursor:pointer;box-sizing:border-box;background:#f2f0eb;padding:20px;display:flex;flex-direction:column;gap:8px" style-hover="background:#e9e6de" style-focus="outline:3px solid #17160f;outline-offset:-4px">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6b685e">{{ e.code }}</span>
+<span style="font-size:19px;font-weight:500;letter-spacing:-.01em">{{ e.name }}</span>
+<span style="font-size:15px;line-height:1.45;color:#3b3930">{{ e.where }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:4px">Tell me about it →</span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<footer id="credits" style="display:flex;flex-direction:column;gap:8px;padding:28px clamp(20px,4vw,56px) 40px;border-top:1px solid #17160f;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#3b3930">
+<span>Coordinates from NASA and NSSDCA mission pages. Longitudes shown east-positive.</span>
+<sc-for list="{{ credits }}" as="c" hint-placeholder-count="2"><span style="color:#6b685e">{{ c }}</span></sc-for>
+</footer>
+
+<sc-if value="{{ hasOpen }}" hint-placeholder-val="{{ false }}">
+<dc-import name="MachineSheet" code="{{ openCode }}" on-close="{{ close }}" on-pick="{{ pick }}" on-map-page="{{ true }}" hint-size="0px,0px"></dc-import>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null, open: null };
+  componentDidMount() {
+    import("./machines.js").then(d => this.setState({ d }));
+    try { const a = JSON.parse(localStorage.getItem("soughtout.a11y")) || {}; const r = document.documentElement.style; r.zoom = a.big ? "1.2" : ""; r.filter = a.hc ? "contrast(1.4)" : ""; } catch (e) {}
+    const hm = location.hash.match(/^#m=([A-Z]{3}-\d{3})$/); if (hm) this.setState({ open: hm[1] });
+  }
+  renderVals() {
+    const d = this.state.d, open = this.state.open;
+    const base = { openCode: open, hasOpen: !!open, close: () => this.setState({ open: null }), pick: c => this.setState({ open: c }) };
+    if (!d) return { ...base, worlds: [], elsewhere: [], legend: [], credits: [] };
+    const S = d.STATUS;
+    const worlds = ["moon", "mars"].map(k => {
+      const W = d.WORLDS[k], list = d.MACHINES.filter(m => m.dest === k && d.LOC[m.code] && d.LOC[m.code][1]);
+      const seen = {};
+      const sites = [];
+      list.forEach(m => d.LOC[m.code][1].forEach(p => {
+        const q = d.pos(p[0], p[1]), key = q.x + q.y, on = m.code === open, dup = seen[key];
+        seen[key] = (seen[key] || 0) + 1;
+        sites.push({ ...q, name: m.name, color: S[m.status][1], size: on ? "18px" : "12px", z: on ? 4 : 2 - (dup ? 1 : 0),
+          label: p[2] || m.name.replace(/ (Lander|Rover|Helicopter|Spacecraft)$/, ""), labelDisplay: dup ? "none" : "block",
+          labelShift: q.xp > 60 ? "translate(calc(-100% - 14px),-50%)" : "translate(14px,-50%)",
+          aria: `${m.name}, ${d.LOC[m.code][0]}. Open its story`, pick: () => this.setState({ open: m.code }) });
+      }));
+      return { name: W.name, bg: `url(${W.map})`, count: `${list.length} machines`, sites };
+    });
+    const elsewhere = d.MACHINES.filter(m => m.dest === "deep").map(m => ({ code: m.code, name: m.name, where: d.LOC[m.code][0], pick: () => this.setState({ open: m.code }) }));
+    const used = [...new Set(d.MACHINES.filter(m => m.dest !== "deep").map(m => m.status))];
+    return { ...base, worlds, elsewhere, legend: used.map(k => ({ label: S[k][0], color: S[k][1] })), credits: [d.WORLDS.moon.credit, d.WORLDS.mars.credit, "Photos: NASA, public domain"] };
+  }
+}
+</script>
+</body>
+</html>
