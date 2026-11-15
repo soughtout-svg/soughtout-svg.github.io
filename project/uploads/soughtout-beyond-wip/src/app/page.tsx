@@ -5,6 +5,7 @@ import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { Lifespans } from "@/components/home/Lifespans";
 import { MeetScout } from "@/components/home/MeetScout";
+import { NasaData } from "@/components/home/NasaData";
 import { Prologue } from "@/components/home/Prologue";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Catalog />
       <ChapterStrip />
       <Lifespans />
+      <NasaData />
       <DriftingBanner />
       <MeetScout />
       <HowItWorks />
