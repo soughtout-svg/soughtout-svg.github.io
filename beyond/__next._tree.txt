@@ -1,4 +1,4 @@
-:HL["/beyond/_next/static/chunks/26z308e0sn1c5.css","style"]
+:HL["/beyond/_next/static/chunks/0oaj60nid2byt.css","style"]
 :HC["/",""]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"gqxNtx-BCXgMj1QIvSJ-P","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"Hxzm1LtG7IGiH6jUiu2lU","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
