@@ -11,7 +11,7 @@ import { useToday } from "@/lib/today";
 const TEAM = {
   team: "[Team name]",
   members: "[Team members’ names]",
-  challenge: "[Challenge name]",
+  challenge: "Abandoned but not Forgotten",
 };
 const SITE = "soughtout-svg.github.io/beyond";
 
@@ -113,8 +113,8 @@ export function Deck() {
       <Slide n={2}>
         <div className="grid h-full grid-cols-[1.15fr_1fr]">
           <div className="flex flex-col justify-center gap-[2.4cqw] p-[5cqw]">
-            <Kicker>The problem</Kicker>
-            <H>We left robots on other worlds. Most people don’t know they’re there.</H>
+            <Kicker>The challenge · Abandoned but not Forgotten</Kicker>
+            <H>NASA left hardware on the Moon and Mars. Most students don’t know it’s there.</H>
             <p className="m-0 text-[1.9cqw] leading-[1.45] text-ink-2">
               Rovers, landers, a helicopter, a mirror and probes are still out there. Their stories are scattered across
               hundreds of technical mission pages written for experts, not students.
@@ -175,7 +175,7 @@ export function Deck() {
                 </li>
               ))}
             </ol>
-            <p className="m-0 font-mono text-[1.2cqw] text-muted">Read aloud · Larger text · High contrast · Print as a worksheet</p>
+            <p className="m-0 font-mono text-[1.2cqw] text-muted">Read aloud · Larger text · High contrast · Print as a worksheet · A 3D Scout to take apart, each part labelled with the machine it came from</p>
           </div>
           <div className="flex flex-col gap-[1.4cqw] bg-paper-2 p-[3cqw]">
             <div className="flex gap-[1.6cqw]">
