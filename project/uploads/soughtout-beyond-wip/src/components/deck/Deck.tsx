@@ -9,8 +9,8 @@ import { useToday } from "@/lib/today";
 
 /** Fill these in before submitting. They appear on slides 1 and 7. */
 const TEAM = {
-  team: "[Team name]",
-  members: "[Team members’ names]",
+  team: "SoughtOut Beyond",
+  members: "Soughtout Chijioke Joseph",
   challenge: "Abandoned but not Forgotten",
 };
 const SITE = "soughtout-svg.github.io/beyond";
