@@ -1,5 +1,5 @@
 export const AI_DISCLOSURE =
-  "Background pictures and Scout were made with Higgsfield, an AI image generator, and are marked as AI on the page. The site’s code was written with help from Claude, an AI assistant, and the story text was drafted with AI help, then checked against NASA, JPL and NSSDCA pages.";
+  "Background pictures and Scout’s picture in the corner guide were made with Higgsfield, an AI image generator, and are marked as AI on the page. The 3D Scout model is built in code from simple shapes. The site’s code was written with help from Claude, an AI assistant, and the story text was drafted with AI help, then checked against NASA, JPL and NSSDCA pages.";
 
 export function SiteFooter() {
   return (
