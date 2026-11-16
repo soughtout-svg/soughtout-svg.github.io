@@ -31,7 +31,7 @@ function Slide({ n, children, dark = false, className = "" }: { n: number; child
       className={`deck-slide @container relative mx-auto aspect-[16/9] w-[min(100vw,calc(100svh*16/9))] overflow-hidden ${dark ? "bg-ink text-paper" : "bg-paper text-ink"} ${className}`}
     >
       {children}
-      <span className={`absolute left-[5cqw] bottom-[2cqw] font-mono text-[1.1cqw] ${dark ? "text-paper/60" : "text-muted"}`}>
+      <span className={`absolute left-[5cqw] bottom-[2cqw] font-mono text-[1.1cqw] ${dark ? "text-paper/95" : "text-ink-2"}`}>
         SoughtOut Beyond · {n}/7
       </span>
     </section>
@@ -39,7 +39,7 @@ function Slide({ n, children, dark = false, className = "" }: { n: number; child
 }
 
 const Kicker = ({ children, dark = false }: { children: ReactNode; dark?: boolean }) => (
-  <span className={`font-mono text-[1.3cqw] ${dark ? "text-accent-bright" : "text-accent"}`}>{children}</span>
+  <span className={`font-mono text-[1.3cqw] ${dark ? "text-[#FFA15C]" : "text-[#9E3A10]"}`}>{children}</span>
 );
 const H = ({ children }: { children: ReactNode }) => (
   <h2 className="m-0 text-[4.4cqw] leading-[1] font-medium tracking-[-.035em] text-balance">{children}</h2>
@@ -95,16 +95,16 @@ export function Deck() {
           <Kicker dark>NASA Space Apps Challenge 2026 · {TEAM.challenge}</Kicker>
           <div className="flex flex-col gap-[1.6cqw]">
             <h1 className="m-0 text-[8cqw] leading-[.92] font-medium tracking-[-.04em]">SoughtOut Beyond</h1>
-            <p className="m-0 max-w-[60cqw] text-[2.4cqw] leading-[1.3] text-[#d9d5ca]">
+            <p className="m-0 max-w-[60cqw] text-[2.4cqw] leading-[1.3] text-paper">
               Stories of the machines we left on the Moon, Mars and in deep space, told in their own words.
             </p>
           </div>
           <div className="flex flex-col gap-[.6cqw] font-mono text-[1.5cqw]">
             <span>Team: {TEAM.team}</span>
-            <span className="text-[#d9d5ca]">{TEAM.members}</span>
+            <span className="text-paper">{TEAM.members}</span>
           </div>
         </div>
-        <span className="absolute top-[2.4cqw] right-[3cqw] bg-ink/75 px-[.8cqw] py-[.3cqw] font-mono text-[1cqw] text-paper/80">
+        <span className="absolute top-[2.4cqw] right-[3cqw] bg-ink/75 px-[.8cqw] py-[.3cqw] font-mono text-[1cqw] text-paper/95">
           Background: AI-generated image · Higgsfield
         </span>
       </Slide>
@@ -123,7 +123,7 @@ export function Deck() {
           <div className="flex flex-col border-l border-ink">
             <Photo src={OPP.img} alt={OPP.alt} className="flex-1" />
             <div className="flex flex-col gap-[.6cqw] border-t border-ink p-[3cqw]">
-              <span className="font-mono text-[1.2cqw] text-muted">MRS-001 · Opportunity · Days without a signal</span>
+              <span className="font-mono text-[1.2cqw] text-ink-2">MRS-001 · Opportunity · Days without a signal</span>
               <span className="font-mono text-[6cqw] leading-none font-medium tracking-[-.04em] text-accent">{oppDays}</span>
               <span className="text-[1.4cqw] text-ink-2">Last heard Jun 10, 2018, during a planet-wide dust storm.</span>
             </div>
@@ -170,19 +170,19 @@ export function Deck() {
             <ol className="m-0 flex list-none flex-col gap-[.9cqw] p-0 text-[1.6cqw]">
               {["The Mission: why was it sent?", "The Journey: how did it get there?", "The Discovery: what did it find?", "The Final Signal: how did it end?", "The Legacy: why does it still matter?"].map((t, i) => (
                 <li key={t} className="flex gap-[1cqw]">
-                  <span className="font-mono text-muted">0{i + 1}</span>
+                  <span className="font-mono text-ink-2">0{i + 1}</span>
                   {t}
                 </li>
               ))}
             </ol>
-            <p className="m-0 font-mono text-[1.2cqw] text-muted">Read aloud · Larger text · High contrast · Print as a worksheet · A 3D Scout to take apart, each part labelled with the machine it came from</p>
+            <p className="m-0 font-mono text-[1.2cqw] text-ink-2">Read aloud · Larger text · High contrast · Print as a worksheet · A 3D Scout to take apart, each part labelled with the machine it came from</p>
           </div>
           <div className="flex flex-col gap-[1.4cqw] bg-paper-2 p-[3cqw]">
             <div className="flex gap-[1.6cqw]">
               <Photo src={OPP.img} alt={OPP.alt} className="aspect-[4/3] w-[16cqw] flex-none" />
               <div className="flex flex-col gap-[.6cqw]">
                 <span className="text-[2.6cqw] leading-none font-medium tracking-[-.03em]">Opportunity</span>
-                <span className="font-mono text-[1.1cqw] text-muted">
+                <span className="font-mono text-[1.1cqw] text-ink-2">
                   {OPP.mission} · {when(OPP)}
                 </span>
                 <span className="font-mono text-[1.1cqw] text-accent">Chapter 03 · The Discovery</span>
@@ -190,7 +190,7 @@ export function Deck() {
               </div>
             </div>
             <div className="flex flex-col gap-[.8cqw] border border-ink bg-paper p-[1.6cqw]">
-              <span className="font-mono text-[1.1cqw] text-muted">Quiz · Question 2</span>
+              <span className="font-mono text-[1.1cqw] text-ink-2">Quiz · Question 2</span>
               <span className="text-[1.6cqw] font-medium">{story.quiz[1][0]}</span>
               <div className="grid grid-cols-3 gap-[.8cqw]">
                 {story.quiz[1][1].map((o, i) => (
@@ -216,7 +216,7 @@ export function Deck() {
               <Kicker dark>Where they rest</Kicker>
               <H>Every dot is a real landing site.</H>
             </div>
-            <p className="m-0 max-w-[34cqw] text-[1.5cqw] leading-[1.45] text-[#d9d5ca]">
+            <p className="m-0 max-w-[34cqw] text-[1.5cqw] leading-[1.45] text-paper">
               {SITES} machine locations plotted by latitude and longitude on NASA Moon and Mars maps. Tap a dot to open
               that machine’s story.
             </p>
@@ -239,7 +239,7 @@ export function Deck() {
                 </span>
               </span>
             ))}
-            <span className="absolute bottom-[1cqw] left-[1cqw] font-mono text-[1cqw] text-paper/70">{WORLDS.mars.credit}</span>
+            <span className="absolute bottom-[1cqw] left-[1cqw] font-mono text-[1cqw] text-paper/95">{WORLDS.mars.credit}</span>
           </div>
         </div>
       </Slide>
@@ -266,12 +266,12 @@ export function Deck() {
           </div>
           <div className="grid flex-1 grid-cols-2 gap-[3cqw] text-[1.4cqw] leading-[1.45]">
             <div className="flex flex-col gap-[.8cqw]">
-              <span className="font-mono text-[1.1cqw] text-muted">NASA data used</span>
+              <span className="font-mono text-[1.1cqw] text-ink-2">NASA data used</span>
               <span>NASA Science mission pages · NSSDCA spacecraft records · NASA mission photos and illustrations · LRO Moon mosaic · Viking Mars mosaic</span>
               <span className="text-ink-2">Every story ends with its sources, so teachers can check them.</span>
             </div>
             <div className="flex flex-col gap-[.8cqw]">
-              <span className="font-mono text-[1.1cqw] text-muted">Built with</span>
+              <span className="font-mono text-[1.1cqw] text-ink-2">Built with</span>
               <span>Next.js · React · TypeScript · Tailwind CSS · Framer Motion · GitHub Pages</span>
               <span className="text-ink-2">
                 AI use: background images and the Scout guide made with Higgsfield (watermarked); code written with
@@ -292,7 +292,7 @@ export function Deck() {
             <H>
               Left behind, but <span className="text-accent-bright">not forgotten.</span>
             </H>
-            <ul className="m-0 flex list-none flex-col gap-[.8cqw] p-0 text-[1.8cqw] text-[#d9d5ca]">
+            <ul className="m-0 flex list-none flex-col gap-[.8cqw] p-0 text-[1.8cqw] text-paper">
               <li>→ More machines: Voyager 1 and 2, the Apollo 16 and 17 rovers</li>
               <li>→ More languages, so every student can read them</li>
               <li>→ Classroom packs: printable worksheets and teacher guides</li>
@@ -302,12 +302,12 @@ export function Deck() {
             <span>
               Try it: <span className="text-accent-bright">{SITE}</span>
             </span>
-            <span className="text-paper/70">
+            <span className="text-paper/95">
               {TEAM.team} · {TEAM.challenge}
             </span>
           </div>
         </div>
-        <span className="absolute top-[2.4cqw] right-[3cqw] bg-ink/75 px-[.8cqw] py-[.3cqw] font-mono text-[1cqw] text-paper/80">
+        <span className="absolute top-[2.4cqw] right-[3cqw] bg-ink/75 px-[.8cqw] py-[.3cqw] font-mono text-[1cqw] text-paper/95">
           Background: AI-generated image · Higgsfield
         </span>
       </Slide>
