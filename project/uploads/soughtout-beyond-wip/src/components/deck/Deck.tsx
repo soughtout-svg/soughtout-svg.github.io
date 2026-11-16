@@ -26,9 +26,9 @@ const QUESTIONS = Object.values(STORIES).reduce((n, st) => n + st.quiz.length, 0
 // Screenshots of the site, served from public/deck-img (relative so it works under /beyond).
 const IMG = (name: string) => `../deck-img/${name}.png`;
 
-// Colours: bright blue instead of black, white and yellow on blue.
-const BLUE = "bg-[#1E3FA8] text-[#FFFDF7]";
-const YELLOW = "text-[#FFD54A]";
+// The website’s colours: warm paper, near-black ink and its orange, kept high-contrast.
+const BLUE = "bg-ink text-[#FFFDF7]";
+const YELLOW = "text-[#FFA15C]";
 const RUST = "text-[#9E3A10]";
 
 /** One 16:9 slide on a 1920-wide canvas; 1cqw = 19.2px, so every size scales with the window. */
@@ -39,7 +39,7 @@ function Slide({ n, children, dark = false, className = "" }: { n: number; child
       className={`deck-slide @container relative mx-auto aspect-[16/9] w-[min(100vw,calc(100svh*16/9))] overflow-hidden ${dark ? BLUE : "bg-paper text-ink"} ${className}`}
     >
       <div className="flex h-full flex-col gap-[2.1cqw] px-[6.67cqw] pt-[6.67cqw] pb-[8.33cqw]">{children}</div>
-      <span className={`absolute bottom-[3.33cqw] left-[6.67cqw] font-mono text-[1.46cqw] ${dark ? "text-[#E3E9FF]" : "text-[#45423A]"}`}>
+      <span className={`absolute bottom-[3.33cqw] left-[6.67cqw] font-mono text-[1.46cqw] ${dark ? "text-[#E6E2D8]" : "text-[#45423A]"}`}>
         SoughtOut Beyond · {n}/7
       </span>
     </section>
@@ -99,7 +99,7 @@ export function Deck() {
   });
 
   return (
-    <div ref={ref} className="deck flex flex-col items-center gap-[3vh] bg-[#0F1F55] py-[3vh]">
+    <div ref={ref} className="deck flex flex-col items-center gap-[3vh] bg-[#0d0c09] py-[3vh]">
       {/* 1 · Title: project, tagline, team, member, challenge */}
       <Slide n={1} dark>
         <svg aria-hidden="true" viewBox="0 0 560 560" className="absolute top-[26.7cqw] left-[70.4cqw] w-[22.9cqw]">
@@ -107,7 +107,7 @@ export function Deck() {
           <circle cx="280" cy="280" r="170" fill="none" stroke="#fff" strokeOpacity=".35" strokeWidth="2" />
           <circle cx="280" cy="280" r="90" fill="#E9E6DE" />
           <path d="M280 190 A90 90 0 0 1 280 370 A60 90 0 0 0 280 190 Z" fill="#C9C4B8" />
-          <circle cx="476" cy="125" r="14" fill="#FFD54A" />
+          <circle cx="476" cy="125" r="14" fill="#FFA15C" />
           <circle cx="118" cy="398" r="9" fill="#FF8A3D" />
         </svg>
         <div className="relative flex h-full flex-col justify-between">
@@ -120,7 +120,7 @@ export function Deck() {
           </div>
           <div className="flex flex-col gap-[.6cqw] font-mono">
             <span className="text-[2.1cqw] text-white">Team: {TEAM.team}</span>
-            <span className="text-[1.8cqw] text-[#EEF2FF]">{TEAM.members}</span>
+            <span className="text-[1.8cqw] text-[#F0ECE2]">{TEAM.members}</span>
           </div>
         </div>
       </Slide>
@@ -140,7 +140,7 @@ export function Deck() {
             <Lead dark size={2.5}>
               “…and thou shalt be called, <span className={YELLOW}>Sought out</span>, A city not forsaken.”
             </Lead>
-            <span className="font-mono text-[1.56cqw] text-[#EEF2FF]">Isaiah 62:12</span>
+            <span className="font-mono text-[1.56cqw] text-[#F0ECE2]">Isaiah 62:12</span>
             <Lead dark>These machines were left behind, but they are not forsaken. So we went looking for them.</Lead>
           </div>
         </div>
@@ -240,7 +240,7 @@ export function Deck() {
             <span className="text-[2cqw] text-white">
               Try it: <span className={YELLOW}>{SITE}</span>
             </span>
-            <span className="text-[1.56cqw] text-[#EEF2FF]">
+            <span className="text-[1.56cqw] text-[#F0ECE2]">
               Team {TEAM.team} · {TEAM.challenge}
             </span>
           </div>
