@@ -17,7 +17,7 @@
     <div class="nav-inner">
       <a class="brand" id="brand" href="#top">
         <span class="brand-dot"></span>
-        <span class="brand-name">S. JOSEPH</span>
+        <span class="brand-name">SOUGHTOUT J.</span>
       </a>
       <div class="nav-links">
         <a class="nav-link" href="#focus"><span class="num">01</span>Focus</a>
@@ -30,14 +30,17 @@
         <button class="theme-btn" id="theme-btn" aria-label="Toggle light/dark theme">&#9790;</button>
       </div>
     </div>
+    <div class="progress" id="progress"></div>
   </nav>
 
   <!-- HERO -->
+  <div class="hero-wrap">
+  <canvas class="swarm" id="swarm" aria-hidden="true"></canvas>
   <header class="hero" id="top">
     <div class="hero-eyebrow">Robotics &amp; Autonomous Systems Researcher</div>
     <div class="hero-row">
       <div class="hero-lead-col">
-        <h1 class="hero-headline">Soughtout<br>Chijioke<br><span class="accent">Joseph</span></h1>
+        <h1 class="hero-headline"><span class="line"><span class="accent">Soughtout</span></span><span class="line"><span>Chijioke</span></span><span class="line"><span>Joseph</span></span></h1>
         <p class="hero-lead">Undergraduate engineer building <strong>autonomy for flying robots</strong> — multi-drone simulation, GPS-denied navigation, and energy-aware planning for UAVs that keep their bearings when the signal drops.</p>
       </div>
       <div class="status-card">
@@ -47,7 +50,9 @@
         <div class="status-label">INSTITUTION</div>
         <div class="status-val">Baylor University · ECE</div>
         <div class="status-label">LOCATION</div>
-        <div class="status-val no-gap">31.55&deg; N, 97.11&deg; W — Waco, TX</div>
+        <div class="status-val">31.55&deg; N, 97.11&deg; W — Waco, TX</div>
+        <div class="status-label">LOCAL TIME</div>
+        <div class="status-val no-gap"><span id="clock">--:--:--</span> <span class="status-tz">CT</span></div>
       </div>
     </div>
     <div class="hero-actions">
@@ -55,7 +60,13 @@
       <a class="action-link" href="https://www.linkedin.com/in/soughtout/" target="_blank" rel="noopener">linkedin.com/soughtout</a>
       <a class="action-link action-link--cv" href="assets/Soughtout_Chijioke_Joseph_CV.pdf" download>Download CV &darr;</a>
     </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num"><span data-count="9">9</span>+</div><div class="stat-label">concurrent drones simulated</div></div>
+      <div class="stat"><div class="stat-num">~<span data-count="30">30</span>%</div><div class="stat-label">wet-weather responsiveness gain</div></div>
+      <div class="stat"><div class="stat-num">1<span class="stat-of"> of </span><span data-count="162">162</span></div><div class="stat-label">selected for Black in AI ELAI</div></div>
+    </div>
   </header>
+  </div>
 
   <!-- FOCUS -->
   <section id="focus" class="section">
