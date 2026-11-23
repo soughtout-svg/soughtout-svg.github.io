@@ -143,7 +143,8 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
       countObs.unobserve(el);
     });
   }, { threshold: 0.6 });
-  counters.forEach((el) => { el.textContent = '0'; countObs.observe(el); });
+  // real numbers stay in place until the count-up actually starts on screen
+  counters.forEach((el) => countObs.observe(el));
 }
 
 // ── Hero drone swarm ───────────────────────────────────────
